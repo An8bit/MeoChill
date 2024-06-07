@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/main_cubit.dart';
+<<<<<<< HEAD
 import 'package:meochill/repostsitories/MongoService.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/api_sever_impl.dart';
@@ -14,6 +15,20 @@ class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
   static const String TAG = 'Bloc';
   const SimpleBlocObsever(this.log);
+=======
+import 'package:meochill/repostsitories/api.dart';
+import 'package:meochill/repostsitories/api_impl.dart';
+import 'package:meochill/repostsitories/log.dart';
+import 'package:meochill/repostsitories/login_impl.dart';
+import 'package:meochill/routes.dart';
+import 'package:meochill/widget/screens/login/login_screen.dart';
+
+
+class SimpleBlocObsever extends BlocObserver {
+   final Log log;
+  static const String TAG ='Bloc';
+  const SimpleBlocObsever (this.log);
+>>>>>>> 401cf04 (WIP: Commit current changes)
   @override
   void onCreate(BlocBase<dynamic> bloc) {
     super.onCreate(bloc);
@@ -52,6 +67,19 @@ class SimpleBlocObsever extends BlocObserver {
     super.onClose(bloc);
     log.i(TAG, 'onClose: ${bloc.runtimeType}');
   }
+<<<<<<< HEAD
+=======
+}
+void main() {
+  Log log = logimpl();
+  Bloc.observer = SimpleBlocObsever(log);
+
+  runApp(
+    RepositoryProvider<Log>.value(
+    value: log, 
+    child: Riponsitory())
+    );
+>>>>>>> 401cf04 (WIP: Commit current changes)
 }
 
 void main() async {
@@ -83,6 +111,7 @@ void main() async {
 class Repository extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return MultiRepositoryProvider(providers: [
       RepositoryProvider<Api>(
         //xài trực tiếp từ anh mongodb
@@ -93,6 +122,13 @@ class Repository extends StatelessWidget {
         create: (context) => ApiImpl(context.read<LogApp>()),
       )
     ], child: Provider());
+=======
+    return RepositoryProvider<Api>(
+
+      create: (context) => ApiImpl(context.read<Log>()),
+      child: Provider(),
+    );
+>>>>>>> 401cf04 (WIP: Commit current changes)
   }
 }
 

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:meochill/models/movie2.dart';
+=======
+import 'package:meochill/models/Movie.dart';
+>>>>>>> 401cf04 (WIP: Commit current changes)
 import 'package:meochill/widget/screens/details/details_screen.dart';
 
 

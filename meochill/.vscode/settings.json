@@ -1,7 +1,11 @@
 {
+<<<<<<< HEAD
     "CodeGPT.apiKey": "OpenAI",
     "cSpell.words": [
         "hetcuutt",
         "loginmodel"
     ]
+=======
+    "CodeGPT.apiKey": "OpenAI"
+>>>>>>> 401cf04 (WIP: Commit current changes)
 }
