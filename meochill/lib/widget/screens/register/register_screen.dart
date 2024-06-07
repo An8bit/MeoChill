@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/screens/login/login_screen.dart';
+import 'package:meochill/widget/screens/login/login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const String route = "RegisterScreen";

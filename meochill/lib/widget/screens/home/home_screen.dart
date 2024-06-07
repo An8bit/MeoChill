@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meochill/models/Movie.dart';
-import 'package:meochill/screens/details/details_screen.dart';
+import 'package:meochill/widget/screens/details/details_screen.dart';
 
 
 class HomeScreen extends StatelessWidget {
