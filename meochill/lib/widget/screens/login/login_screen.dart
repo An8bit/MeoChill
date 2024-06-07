@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meochill/screens/home/home_screen.dart';
-import 'package:meochill/screens/login/register_screen.dart';
+import 'package:meochill/widget/screens/home/home_screen.dart';
+import 'package:meochill/widget/screens/register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String route = "LoginScreen";
