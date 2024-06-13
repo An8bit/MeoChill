@@ -1,11 +1,17 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
     "CodeGPT.apiKey": "OpenAI",
     "cSpell.words": [
         "hetcuutt",
         "loginmodel"
     ]
+<<<<<<< HEAD
 =======
     "CodeGPT.apiKey": "OpenAI"
 >>>>>>> 401cf04 (WIP: Commit current changes)
+=======
+>>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
 }

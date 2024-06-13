@@ -209,3 +209,4 @@ class MovieCardVertical extends StatelessWidget {
   }
 }
 
+
