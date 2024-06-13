@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/models/Movie.dart';
+import 'package:meochill/models/movie2.dart';
 import 'package:meochill/widget/screens/details/details_screen.dart';
 
 
@@ -19,13 +19,13 @@ class HomeScreen extends StatelessWidget {
 }
 
 class MovieHomePage extends StatelessWidget {
-  final List<Movie> nowShowingMovies = [
+ List<Movie> nowShowingMovies = [
     Movie(title: 'Spiderman', rating: '9.1/10 IMDb', imageUrl: 'assets/spiderman.jpg'),
     Movie(title: 'Eternals', rating: '9.5/10 IMDb', imageUrl: 'assets/eternals.jpg'),
     Movie(title: 'Shang Chi', rating: '8.9/10 IMDb', imageUrl: 'assets/shangchi.jpg'),
   ];
 
-  final List<Movie> popularMovies = [
+   List<Movie> popularMovies = [
     Movie(title: 'Venom Let There Be Carnage', rating: '6.4/10 IMDb', imageUrl: 'assets/venom.jpg', additionalInfo: '1h 47m | Horror | Mystery | Thriller'),
     Movie(title: 'The King\'s Man', rating: '8.4/10 IMDb', imageUrl: 'assets/kingsman.jpg', additionalInfo: '2h 11m | Action | Fantasy'),
   ];
@@ -204,5 +204,4 @@ class MovieCardVertical extends StatelessWidget {
     );
   }
 }
-
 

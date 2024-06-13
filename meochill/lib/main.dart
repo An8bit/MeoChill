@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/main_cubit.dart';
+import 'package:meochill/repostsitories/MongoService.dart';
 import 'package:meochill/repostsitories/api.dart';
-import 'package:meochill/repostsitories/api_impl.dart';
+import 'package:meochill/repostsitories/api_sever_impl.dart';
 import 'package:meochill/repostsitories/log.dart';
 import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
+import 'package:meochill/widget/screens/home/home_screen.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
 
-
 class SimpleBlocObsever extends BlocObserver {
-   final Log log;
-  static const String TAG ='Bloc';
-  const SimpleBlocObsever (this.log);
+  final LogApp log;
+  static const String TAG = 'Bloc';
+  const SimpleBlocObsever(this.log);
   @override
   void onCreate(BlocBase<dynamic> bloc) {
     super.onCreate(bloc);
@@ -52,25 +53,46 @@ class SimpleBlocObsever extends BlocObserver {
     log.i(TAG, 'onClose: ${bloc.runtimeType}');
   }
 }
-void main() {
-  Log log = logimpl();
+
+void main() async {
+  // Loginmodel l =  Loginmodel(username: "hehe", password: "heyyo");
+
+  //  MongoService mongoService= MongoService();
+  //  await mongoService.connect();
+  //  try {
+  //   // await mongoService.connect();
+  // bool a = await mongoService.checkLogin(l); // Get list of movies
+
+  //   // Convert list of maps to list of categories
+  //  // List<Category> categories = movies.map((json) => Category.fromJson(json)).toList();
+
+  //   // Print list of categories
+  //   // categories.forEach((category) {
+  //   //   print('Category ID: ${category.id}, Name: ${category.name}, Slug: ${category.slug}');
+  //   // });
+  // } catch (e) {
+  //   print('Error: $e');
+  // }
+
+  LogApp log = logimpl();
   Bloc.observer = SimpleBlocObsever(log);
 
-  runApp(
-    RepositoryProvider<Log>.value(
-    value: log, 
-    child: Riponsitory())
-    );
+  runApp(RepositoryProvider<LogApp>.value(value: log, child: Repository()));
 }
 
-class Riponsitory extends StatelessWidget {
+class Repository extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<Api>(
-
-      create: (context) => ApiImpl(context.read<Log>()),
-      child: Provider(),
-    );
+    return MultiRepositoryProvider(providers: [
+      RepositoryProvider<Api>(
+        //xài trực tiếp từ anh mongodb
+        create: (context) => MongoService(context.read<LogApp>()),
+      ),
+      RepositoryProvider<Api>(
+        //thay đổi lên web api ở đây
+        create: (context) => ApiImpl(context.read<LogApp>()),
+      )
+    ], child: Provider());
   }
 }
 

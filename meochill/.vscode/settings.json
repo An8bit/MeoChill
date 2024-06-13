@@ -1,3 +1,7 @@
 {
-    "CodeGPT.apiKey": "OpenAI"
+    "CodeGPT.apiKey": "OpenAI",
+    "cSpell.words": [
+        "hetcuutt",
+        "loginmodel"
+    ]
 }

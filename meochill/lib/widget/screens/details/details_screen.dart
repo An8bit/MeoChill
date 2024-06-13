@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/models/Movie.dart';
+import 'package:meochill/models/movie2.dart';
 
 class MovieDetailScreen extends StatelessWidget {
-  static const String route = "MovieDetailScreen";
-
-  final Movie movie;
+  static const String route  = "MovieDetailScreen";
+  
+   final Movie movie;
 
   MovieDetailScreen({required this.movie});
 
@@ -20,7 +20,7 @@ class MovieDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(movie.title),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -29,7 +29,6 @@ class MovieDetailScreen extends StatelessWidget {
             MovieHeader(imageUrl: movie.imageUrl),
             MovieInfo(movie: movie),
             MovieDescription(description: movie.additionalInfo ?? 'No additional information available'),
-            EpisodeGrid(),  // Thêm widget này vào Column để hiển thị các tập phim
             OtherMovies(otherMovies: otherMovies),
           ],
         ),
@@ -53,7 +52,10 @@ class MovieHeader extends StatelessWidget {
           Image.asset(imageUrl, fit: BoxFit.cover, width: double.infinity, height: 300),
           IconButton(
             icon: Icon(Icons.play_circle_outline, size: 60, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+
+              
+            },
           ),
         ],
       ),
@@ -78,8 +80,8 @@ class MovieInfo extends StatelessWidget {
           Wrap(
             spacing: 10,
             children: [
-              Chip(label: Text('Hành Động')),
-              Chip(label: Text('Mạo Hiểm')),
+              Chip(label: Text('Action')),
+              Chip(label: Text('Adventure')),
               Chip(label: Text('Fantasy')),
             ],
           ),
@@ -104,31 +106,6 @@ class MovieDescription extends StatelessWidget {
       child: Text(
         description,
         style: TextStyle(fontSize: 16),
-      ),
-    );
-  }
-}
-
-class EpisodeGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 170, // Thiết lập chiều cao cho GridView
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, // Số cột
-          childAspectRatio: 2.0, // Tỷ lệ khung hình của mỗi ô
-          mainAxisSpacing: 10, // Khoảng cách chính giữa các ô
-          crossAxisSpacing: 10, // Khoảng cách phụ giữa các ô
-        ),
-        itemCount: 54, // Số lượng tập từ 1 đến 12
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Center(
-              child: Text('Tập ${index + 1}'),
-            ),
-          );
-        },
       ),
     );
   }
