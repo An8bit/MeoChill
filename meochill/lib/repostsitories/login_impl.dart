@@ -1,6 +1,6 @@
 import 'package:meochill/repostsitories/log.dart';
 
-class logimpl implements Log{
+class logimpl implements LogApp{
   bool isDebug = true;
   @override
   void d(String tag, String content) {

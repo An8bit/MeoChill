@@ -2,14 +2,13 @@
 import 'dart:convert';
 
 class Loginmodel {
-  final String username;
-  final String password;
+   String? username;
+   String? password;
   Loginmodel({
-    required this.username,
-    required this.password,
+     this.username,
+     this.password,
   });
   
-
   Loginmodel copyWith({
     String? username,
     String? password,

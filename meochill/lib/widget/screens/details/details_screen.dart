@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/models/Movie.dart';
+import 'package:meochill/models/movie2.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   static const String route  = "MovieDetailScreen";
@@ -28,7 +28,7 @@ class MovieDetailScreen extends StatelessWidget {
           children: [
             MovieHeader(imageUrl: movie.imageUrl),
             MovieInfo(movie: movie),
-            MovieDescription(description: movie.additionalInfo ?? 'No additional information available'),
+            MovieDescription(description: movie.rating ?? 'No additional information available'),
             OtherMovies(otherMovies: otherMovies),
           ],
         ),
@@ -75,8 +75,8 @@ class MovieInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(movie.title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          Text(movie.rating, style: TextStyle(fontSize: 18, color: Colors.grey)),
+          Text(movie.title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          Text("đang cập nhật", style: TextStyle(fontSize: 18, color: Colors.grey)),
           Wrap(
             spacing: 10,
             children: [
