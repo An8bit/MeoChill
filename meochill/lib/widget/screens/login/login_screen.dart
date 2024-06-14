@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/main.dart';
 import 'package:meochill/models/loginmodel.dart';
@@ -17,7 +18,12 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(context.read<Api>()),
-      child: Page(),
+      child: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Page();
+        },
+      ),
     );
   }
 }
@@ -91,26 +97,43 @@ class FormLogin extends StatelessWidget {
     return Expanded(
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
-          if(state.loadStatus==LoadStatus.Error){
-            ScaffoldMessenger.of(context).showSnackBar(notiBar("Lỗi", true));
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(notiBar("đăng nhập tc", true));
+          if (state.loadStatus == LoadStatus.Error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text("Lỗi", style: TextStyle(color: Colors.red))),
+            );
+          } else if (state.loadStatus == LoadStatus.Done) {
+            Navigator.of(context).pushNamed(HomeScreen.route);
           }
         },
         builder: (context, state) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60), topRight: Radius.circular(60)),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(35),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
+          if (state.loadStatus == LoadStatus.Loading) {
+            return
+             
+                const Center(
+                  child: SpinKitWave(
+                    color: Colors.blue,
+                    size: 50.0,
+                  ),
+                );
+              
+          
+          } else {
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                  topRight: Radius.circular(60),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(35),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
@@ -119,94 +142,98 @@ class FormLogin extends StatelessWidget {
                             blurRadius: 20,
                             offset: Offset(0, 10),
                           ),
-                        ]),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                        ],
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
                               border: Border(
-                                  bottom: BorderSide(color: Colors.grey))),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Phone Or Email",
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: InputBorder.none,
+                                bottom: BorderSide(color: Colors.grey),
+                              ),
                             ),
-                            onChanged: (value) => login.username = value,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "Phone Or Email",
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: InputBorder.none,
+                              ),
+                              onChanged: (value) => login.username = value,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
                               border: Border(
-                                  bottom: BorderSide(color: Colors.grey))),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: InputBorder.none,
+                                bottom: BorderSide(color: Colors.grey),
+                              ),
                             ),
-                            onChanged: (value) => login.password = value,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: InputBorder.none,
+                              ),
+                              onChanged: (value) => login.password = value,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "fogot Password ???",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        
-                        context.read<LoginCubit>().checkLogin(login);
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54)),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterScreen.route);
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54)),
-                      child: Text(
-                        "Register",
-                        style: TextStyle(
+                    SizedBox(height: 15),
+                    Text(
+                      "Forgot Password ???",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 40),
+                    SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          context.read<LoginCubit>().startLogin();
+                          context.read<LoginCubit>().checkLogin(login);
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: Colors.black54),
+                        ),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 40),
+                    SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(RegisterScreen.route);
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: Colors.black54),
+                        ),
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          }
         },
       ),
     );

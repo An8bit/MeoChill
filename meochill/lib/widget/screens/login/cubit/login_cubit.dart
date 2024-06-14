@@ -23,5 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(loadStatus: LoadStatus.Error));
     }
   }
-  
+  Future<void> startLogin()async {
+    emit(state.copyWith(loadStatus: LoadStatus.Loading));
+  }
 }

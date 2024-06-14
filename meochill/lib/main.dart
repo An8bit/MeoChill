@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/main_cubit.dart';
 import 'package:meochill/repostsitories/MongoService.dart';
 import 'package:meochill/repostsitories/api.dart';
-import 'package:meochill/repostsitories/api_sever_impl.dart';
 import 'package:meochill/repostsitories/log.dart';
 import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
@@ -88,10 +87,10 @@ class Repository extends StatelessWidget {
         //xài trực tiếp từ anh mongodb
         create: (context) => MongoService(context.read<LogApp>()),
       ),
-      RepositoryProvider<Api>(
-        //thay đổi lên web api ở đây
-        create: (context) => ApiImpl(context.read<LogApp>()),
-      )
+      // RepositoryProvider<Api>(
+      //   //thay đổi lên web api ở đây
+      //   create: (context) => ApiImpl(context.read<LogApp>()),
+      // )
     ], child: Provider());
   }
 }
