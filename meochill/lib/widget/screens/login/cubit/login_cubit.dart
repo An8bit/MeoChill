@@ -36,10 +36,16 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 401cf04 (WIP: Commit current changes)
 =======
 >>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
   
+=======
+  Future<void> startLogin()async {
+    emit(state.copyWith(loadStatus: LoadStatus.Loading));
+  }
+>>>>>>> 8d501ad (updatelate)
 }
