@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
-=======
 import 'package:flutter_spinkit/flutter_spinkit.dart';
->>>>>>> 8d501ad (updatelate)
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/main.dart';
 import 'package:meochill/models/loginmodel.dart';
@@ -16,12 +9,6 @@ import 'package:meochill/widget/common_widgets/noti_bar.dart';
 import 'package:meochill/widget/screens/home/home_screen.dart';
 import 'package:meochill/widget/screens/login/cubit/login_cubit.dart';
 import 'package:meochill/widget/screens/login/cubit/login_state.dart';
-<<<<<<< HEAD
-=======
-import 'package:meochill/widget/screens/home/home_screen.dart';
->>>>>>> 401cf04 (WIP: Commit current changes)
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
 import 'package:meochill/widget/screens/register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -29,10 +16,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
     return BlocProvider(
       create: (context) => LoginCubit(context.read<Api>()),
       child: BlocConsumer<LoginCubit, LoginState>(
@@ -52,11 +35,6 @@ class Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-=======
->>>>>>> 401cf04 (WIP: Commit current changes)
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
     return Scaffold(
         //nay la chỗ đổ màu cho giao diện bự
         body: Container(
@@ -83,14 +61,6 @@ class Page extends StatelessWidget {
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 401cf04 (WIP: Commit current changes)
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
 class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -113,21 +83,12 @@ class LoginButton extends StatelessWidget {
           SizedBox(
             height: 20, // Add some space before the button
           ),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-          
->>>>>>> 401cf04 (WIP: Commit current changes)
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
         ],
       ),
     );
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 class FormLogin extends StatelessWidget {
   Loginmodel login = Loginmodel();
 
@@ -274,179 +235,6 @@ class FormLogin extends StatelessWidget {
             );
           }
         },
-=======
-
-=======
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
-class FormLogin extends StatelessWidget {
-  Loginmodel login = Loginmodel();
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          if(state.loadStatus==LoadStatus.Error){
-            ScaffoldMessenger.of(context).showSnackBar(notiBar("Lỗi", true));
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(notiBar("đăng nhập tc", true));
-          }
-        },
-        builder: (context, state) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60), topRight: Radius.circular(60)),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(35),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromRGBO(225, 95, 27, .3),
-                            blurRadius: 20,
-                            offset: Offset(0, 10),
-                          ),
-                        ]),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(color: Colors.grey))),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Phone Or Email",
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => login.username = value,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(color: Colors.grey))),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => login.password = value,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "fogot Password ???",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        
-                        context.read<LoginCubit>().checkLogin(login);
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54)),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterScreen.route);
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54)),
-                      child: Text(
-                        "Register",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-<<<<<<< HEAD
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "fogot Password ???",
-                style: TextStyle(color: Colors.grey),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              SizedBox(
-                     height: 50,
-                     width: double.infinity,
-                     child: OutlinedButton(
-                      onPressed: (){
-                        Navigator.of(context).pushNamed(HomeScreen.route);
-                      },
-                       style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.black54)),
-                       child: Text("Login",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                     ),
-                     ),
-              SizedBox(
-                height: 40,
-              ),
-              
-              
-              SizedBox(
-                     height: 50,
-                     width: double.infinity,
-                     child: OutlinedButton(
-                      onPressed: (){
-                         Navigator.of(context).pushNamed(RegisterScreen.route);
-                      },
-                       style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.black54)),
-                       child: Text("Register",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                     ),
-                     ),
-            ],
-          ),
-        ),
->>>>>>> 401cf04 (WIP: Commit current changes)
-=======
-            ),
-          );
-        },
->>>>>>> 138dddf (DONE:kết nối đăng nhập demo)
       ),
     );
   }
