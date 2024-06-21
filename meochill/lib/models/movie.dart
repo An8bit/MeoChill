@@ -1,9 +1,10 @@
+import 'package:bson/bson.dart';
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/country.dart';
 import 'package:meochill/models/episode.dart';
 
 class Movie {
-  String? id;
+  ObjectId? id;
   String? name;
   String? slug;
   String? originname;
@@ -173,4 +174,5 @@ class Root {
         episodes != null ? episodes!.map((v) => v?.toJson()).toList() : null;
     return data;
   }
+  
 }

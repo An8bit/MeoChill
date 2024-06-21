@@ -1,4 +1,5 @@
 import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
 
@@ -57,6 +58,18 @@ class ApiImpl implements Api {
   @override
   Future<void> conNect() {
     // TODO: implement conNect
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<Map<String, dynamic>>> resultListSearch() {
+    // TODO: implement resultListSearch
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Movie>> getTopTrending() {
+    // TODO: implement getTopTrending
     throw UnimplementedError();
   }
   

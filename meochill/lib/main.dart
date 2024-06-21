@@ -6,8 +6,8 @@ import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
 import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
-import 'package:meochill/widget/screens/home/home_screen.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
+import 'package:meochill/widget/screens/search/search_screen.dart';
 
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
@@ -111,7 +111,7 @@ class App extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: mainRoute,
-      initialRoute: LoginScreen.route,
+      initialRoute: SearchScreen.route,
       home: Scaffold(
         body: Center(
           child: Text('Hello vv World!'),

@@ -14,6 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.api) : super(LoginState.init());
   Future<void> checkLogin (Loginmodel login) async {
+  
     await api.conNect();
     emit(state.copyWith(loadStatus: LoadStatus.Loading));
     var result = await api.checkLogin(login);
