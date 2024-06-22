@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meochill/models/Movie.dart';
+import 'package:meochill/screens/details/Comment.dart';
+import 'package:meochill/screens/details/Episode.dart';
+
 
 class MovieDetailScreen extends StatelessWidget {
   static const String route = "MovieDetailScreen";
@@ -33,6 +36,16 @@ class MovieDetailScreen extends StatelessWidget {
             OtherMovies(otherMovies: otherMovies),
           ],
         ),
+      ),
+       floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => CommentSection(),
+          );
+        },
+        child: Icon(Icons.comment),
+        backgroundColor: Colors.blue,
       ),
     );
   }
@@ -109,30 +122,7 @@ class MovieDescription extends StatelessWidget {
   }
 }
 
-class EpisodeGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 170, // Thiết lập chiều cao cho GridView
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, // Số cột
-          childAspectRatio: 2.0, // Tỷ lệ khung hình của mỗi ô
-          mainAxisSpacing: 10, // Khoảng cách chính giữa các ô
-          crossAxisSpacing: 10, // Khoảng cách phụ giữa các ô
-        ),
-        itemCount: 54, // Số lượng tập từ 1 đến 12
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Center(
-              child: Text('Tập ${index + 1}'),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+
 
 class OtherMovies extends StatelessWidget {
   final List<String> otherMovies;
@@ -176,3 +166,5 @@ class OtherMovies extends StatelessWidget {
     );
   }
 }
+
+
