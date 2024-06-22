@@ -6,7 +6,6 @@ class splash_Screen extends StatefulWidget {
  static const String route  = "splash_Screen";
 
  @override
-  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 class _SplashScreenState extends State<splash_Screen> {

@@ -6,9 +6,11 @@ import 'package:meochill/screens/navigationbar/film_Screen.dart';
 import 'package:meochill/screens/search/search_screen.dart';
 
 class HomeScreen2 extends StatefulWidget {
+   
   static const String route  = "HomeScreen2";
   const HomeScreen2({super.key, this.index,});
    final int? index;
+   
   @override
   State<HomeScreen2> createState() => _HomeScreen2State();
 }
@@ -34,11 +36,13 @@ class _HomeScreen2State extends State<HomeScreen2> {
      Center(child: Text('Catogories Screen '),),
      Center(child: Text('Settings Screen '),),
    ];
-
+   
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
     return  Scaffold(
+      backgroundColor: darkMode ? Colors.black : Colors.white,
       body:_Screens[_selectedIndex],
       bottomNavigationBar: NavigationBar(
         elevation:10 ,
@@ -50,8 +54,13 @@ class _HomeScreen2State extends State<HomeScreen2> {
             _selectedIndex = value;
           });
         },
-      
       ),
     );
+  }
+ 
+}
+ class THelperFunctions {
+  static bool isDarkMode(BuildContext context) {
+    return MediaQuery.of(context).platformBrightness == Brightness.dark;
   }
 }

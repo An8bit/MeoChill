@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meochill/common/enum/load_status.dart';
-import 'package:meochill/models/movie.dart';
+
 import 'package:meochill/repostsitories/size_contanst.dart';
 import 'package:meochill/screens/search/cubit/search_cubit.dart';
 import 'package:meochill/screens/search/cubit/search_state.dart';
 import 'package:meochill/screens/search/widget/main_card.dart';
 import 'package:meochill/screens/search/widget/search_tiltle.dart';
 
-import '../../../models/movie2.dart';
+
  
  
 class SearchResult extends StatelessWidget {

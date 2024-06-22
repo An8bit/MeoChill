@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
                     Icons.delete,
                     color: Colors.grey,
                   ),
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.white),
                   onChanged: (
                     value
                   ) {

@@ -13,7 +13,7 @@ Route<dynamic>? mainRoute (RouteSettings settings)=> switch(settings.name){
     RegisterScreen.route => MaterialPageRoute(builder: (context)=> RegisterScreen()),
     
     splash_Screen.route=>MaterialPageRoute(builder: (context)=>splash_Screen()),
-    HomeScreen2.route=>MaterialPageRoute(builder: (context)=>HomeScreen2()),
+    HomeScreen2.route=>MaterialPageRoute(builder: (context)=>const HomeScreen2()),
     
     _ => MaterialPageRoute(builder: (context)=>  splash_Screen())
 };

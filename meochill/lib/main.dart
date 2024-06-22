@@ -14,10 +14,11 @@ import 'package:meochill/screens/home/home2_screen.dart';
 
 
 
+
 Future<void> main() async {
 
 
-
+ 
 
   runApp(RepositoryProvider<LogApp>(
     create: (context) => logimpl(),
@@ -35,6 +36,7 @@ class Riponsitory extends StatelessWidget {
   }
 }
 
+
 class Provider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,13 +51,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       theme: ThemeData(
         primarySwatch: Colors.green
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: mainRoute,
       initialRoute: HomeScreen2.route,
-      home: Scaffold(
+      home: const Scaffold(
         body: Center(
           child: Text('Hello vv World!'),
         ),
