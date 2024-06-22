@@ -9,7 +9,7 @@ class CommentSection extends StatefulWidget {
 
 class _CommentSectionState extends State<CommentSection> {
   final TextEditingController _controller = TextEditingController();
-  List<String> comments = List.generate(10, (index) => "This is a sample comment from User$index");
+  List<String> comments = List.generate(10, (index) => "Bình Luận $index");
 
   void _addComment(String text) {
     setState(() {
