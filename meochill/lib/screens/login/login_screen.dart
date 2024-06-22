@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meochill/screens/home/home_screen.dart';
+import 'package:meochill/screens/home/home2_screen.dart';
+
 import 'package:meochill/screens/login/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String route = "LoginScreen";
-
+    const LoginScreen({super.key,});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         //nay la chỗ đổ màu cho giao diện bự
         body: Container(
-      padding: EdgeInsets.symmetric(vertical: 30),
+      padding: const EdgeInsets.symmetric(vertical: 30),
       width: double.infinity,
       decoration: const BoxDecoration(
           gradient: LinearGradient(begin: Alignment.topCenter, colors: [
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 80,
           ),
           LoginButton(),
@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
 class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,36 +72,37 @@ class FormLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(60), topRight: Radius.circular(60)),
         ),
         child: Padding(
-          padding: EdgeInsets.all(35),
+          padding: const  EdgeInsets.all(35),
           child: Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromRGBO(225, 95, 27, .3),
                         blurRadius: 20,
                         offset: Offset(0, 10),
                       ),
                     ]),
-                child: Column(
+                child:  Column(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
                           border:
                               Border(bottom: BorderSide(color: Colors.grey))),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration(
+                          
                           hintText: "phone && email",
                           hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none,
@@ -109,11 +110,11 @@ class FormLogin extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
                           border:
                               Border(bottom: BorderSide(color: Colors.grey))),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration(
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -124,14 +125,14 @@ class FormLogin extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "fogot Password ???",
                 style: TextStyle(color: Colors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               SizedBox(
@@ -139,17 +140,15 @@ class FormLogin extends StatelessWidget {
                      width: double.infinity,
                      child: OutlinedButton(
                       onPressed: (){
-                        Navigator.of(context).pushNamed(HomeScreen.route);
+                        Navigator.of(context).pushNamed(HomeScreen2.route);
                       },
-                       style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.black54)),
-                       child: Text("Login",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                       style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.black54)),
+                       child: const Text("Login",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                      ),
                      ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              
-              
               SizedBox(
                      height: 50,
                      width: double.infinity,
@@ -157,8 +156,8 @@ class FormLogin extends StatelessWidget {
                       onPressed: (){
                          Navigator.of(context).pushNamed(RegisterScreen.route);
                       },
-                       style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.black54)),
-                       child: Text("Register",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                       style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.black54)),
+                       child: const Text("Register",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                      ),
                      ),
             ],

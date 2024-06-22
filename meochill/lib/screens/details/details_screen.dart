@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/models/Movie.dart';
+import 'package:meochill/models/movie2.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   static const String route  = "MovieDetailScreen";
