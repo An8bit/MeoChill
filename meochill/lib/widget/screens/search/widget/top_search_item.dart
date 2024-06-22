@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meochill/repostsitories/size_contanst.dart';
-import 'package:meochill/screens/home/home2_screen.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
 
 class TopSearchItemTitle extends StatelessWidget {
   const TopSearchItemTitle({super.key, required this.id, required this.imageUrl, required this.title});
@@ -15,7 +15,7 @@ class TopSearchItemTitle extends StatelessWidget {
         GestureDetector(
           onTap: (){
             Navigator.push(
-              context,MaterialPageRoute(builder: (context)=>const HomeScreen2()),
+              context,MaterialPageRoute(builder: (context)=>const HomeScreen()),
             );
           },
           child:  Container(

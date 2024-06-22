@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/screens/home/home2_screen.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
 
 class MainCard extends StatelessWidget {
   final String imageUrl;
@@ -14,7 +14,7 @@ class MainCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (ctx) => const HomeScreen2(
+                builder: (ctx) => const HomeScreen(
                      )));
       },
       child: Container(

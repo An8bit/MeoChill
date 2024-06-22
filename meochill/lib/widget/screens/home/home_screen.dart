@@ -1,57 +1,164 @@
 
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:meochill/screens/navigationbar/film_Screen.dart';
-import 'package:meochill/screens/search/search_screen.dart';
+import 'package:meochill/models/movie2.dart';
+import 'package:card_swiper/card_swiper.dart';
+class filmScreen extends StatefulWidget {
+  const filmScreen({super.key});
 
-class HomeScreen2 extends StatefulWidget {
-  static const String route  = "HomeScreen2";
-  const HomeScreen2({super.key, this.index,});
-   final int? index;
   @override
-  State<HomeScreen2> createState() => _HomeScreen2State();
+  State<filmScreen> createState() => _filmScreenState();
 }
 
-class _HomeScreen2State extends State<HomeScreen2> {
-  int _selectedIndex = 0;
-  @override
-  void initState() {
-   if(widget.index !=null){
-    _selectedIndex = widget.index!;
-   }
-    super.initState();
-  }
-   final _destinations = [
-        const NavigationDestination(icon: Icon(Icons.home), label: 'home'),
-        const NavigationDestination(icon: Icon(Icons.search), label: 'search'),
-        const NavigationDestination(icon: Icon(Icons.category), label: 'category'),
-        const NavigationDestination(icon: Icon(Icons.settings), label: 'setting'),
-   ];
-   final _Screens = const [
-     filmScreen(),
-     SearchScreen(),
-     Center(child: Text('Catogories Screen '),),
-     Center(child: Text('Settings Screen '),),
-   ];
-
-
+class _filmScreenState extends State<filmScreen> {
+  
+  final List<String> bannerUrls = [
+    "https://img.ophim.live/uploads/movies/cach-cuop-ngan-hang-poster.jpg",
+    "https://img.ophim.live/uploads/movies/joker-dien-co-doi-poster.jpg",
+    "https://img.ophim.live/uploads/movies/lang-ma-am-poster.jpg"
+  ];
+   
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body:_Screens[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        elevation:10 ,
-        backgroundColor:Theme.of(context).dialogBackgroundColor,
-        selectedIndex: _selectedIndex,
-        destinations: _destinations,
-        onDestinationSelected: (value){
-          setState(() {
-            _selectedIndex = value;
-          });
-        },
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
       
+      appBar: AppBar(
+        title: const Text("Movies World"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
+      body:SingleChildScrollView(child:  Column(        
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: size.height * 0.25,
+            child: Swiper(
+              itemBuilder: (BuildContext context, int index) {
+                return Image.network(
+                  bannerUrls[index],
+                  fit: BoxFit.contain,
+                );
+              },
+              itemCount: bannerUrls.length,
+              pagination: const SwiperPagination(
+                  builder: DotSwiperPaginationBuilder(
+                activeColor: Colors.red,
+                color: Colors.white,
+              )),
+              autoplay: true,
+              autoplayDelay: 3000,
+            ),
+          ),
+          const SizedBox(
+            height: 15.0,
+          ),
+          TitleBody("Phổ biến"),
+          const SizedBox(height: 15,),
+           ListTopMovie(),
+           TitleBody("Xem nhiều"),
+          const SizedBox(height: 15,),
+           ListTopMovie(),
+           TitleBody("Xem nhiều tuần này"),
+          const SizedBox(height: 15,),
+           ListTopMovie(),
+           TitleBody("Phim mới đề xuất"),
+          const SizedBox(height: 15,),
+           ListTopMovie(),
+          
+        ],
+      ),)
     );
   }
+
+  Padding TitleBody(String title) {
+    return   Padding(
+           padding:  EdgeInsets.symmetric(horizontal: 16.0), //
+          child:   Text(
+            title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+             
+            ),
+          ),
+        );
+        
+  }
 }
+ SingleChildScrollView ListTopMovie() {
+
+  final List<Movie> nowShowingMovies = [
+    Movie(
+        title: 'Spiderman',
+        rating: '9.1/10 IMDb',
+        imageUrl: 'assets/spiderman.jpg'),
+    Movie(
+        title: 'Eternals',
+        rating: '9.5/10 IMDb',
+        imageUrl: 'assets/eternals.jpg'),
+    Movie(
+        title: 'Shang Chi',
+        rating: '8.9/10 IMDb',
+        imageUrl: 'assets/shangchi.jpg'),
+  ];
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 250,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: nowShowingMovies.length,
+              itemBuilder: (context, index) {
+                
+                final movie = nowShowingMovies[index];
+                return Container(
+                  width: 150,
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                    
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    
+                      Expanded(
+                        child: Center(
+                          child: Image.asset(
+                            movie.imageUrl,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          movie.title,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(movie.rating),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+}
+
+
+

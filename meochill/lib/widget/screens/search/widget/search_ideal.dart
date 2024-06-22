@@ -4,10 +4,10 @@ import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/models/movie.dart';
 
 import 'package:meochill/repostsitories/size_contanst.dart';
-import 'package:meochill/screens/search/cubit/search_cubit.dart';
-import 'package:meochill/screens/search/cubit/search_state.dart';
-import 'package:meochill/screens/search/widget/search_tiltle.dart';
-import 'package:meochill/screens/search/widget/top_search_item.dart';
+import 'package:meochill/widget/screens/search/cubit/search_cubit.dart';
+import 'package:meochill/widget/screens/search/cubit/search_state.dart';
+import 'package:meochill/widget/screens/search/widget/search_tiltle.dart';
+import 'package:meochill/widget/screens/search/widget/top_search_item.dart';
 
 class SearchIdelWidget extends StatelessWidget {
   const SearchIdelWidget({super.key});

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
-import 'package:meochill/main.dart';
 import 'package:meochill/models/loginmodel.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/common_widgets/noti_bar.dart';
-import 'package:meochill/widget/screens/home/home_screen.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/login/cubit/login_cubit.dart';
 import 'package:meochill/widget/screens/login/cubit/login_state.dart';
 import 'package:meochill/widget/screens/register/register_screen.dart';
@@ -49,7 +48,7 @@ class Page extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 80,
           ),
           LoginButton(),
@@ -64,7 +63,7 @@ class Page extends StatelessWidget {
 class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +98,7 @@ class FormLogin extends StatelessWidget {
         listener: (context, state) {
           if (state.loadStatus == LoadStatus.Error) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                   content: Text("Lỗi", style: TextStyle(color: Colors.red))),
             );
           } else if (state.loadStatus == LoadStatus.Done) {
@@ -120,7 +119,7 @@ class FormLogin extends StatelessWidget {
           
           } else {
             return Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(60),
@@ -181,7 +180,7 @@ class FormLogin extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Text(
                       "Forgot Password ???",
                       style: TextStyle(color: Colors.grey),
@@ -198,7 +197,7 @@ class FormLogin extends StatelessWidget {
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: Colors.black54),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Login",
                           style: TextStyle(
                             color: Colors.black,
@@ -219,7 +218,7 @@ class FormLogin extends StatelessWidget {
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: Colors.black54),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Register",
                           style: TextStyle(
                             color: Colors.black,

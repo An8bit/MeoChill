@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:meochill/repostsitories/size_contanst.dart';
-import 'package:meochill/screens/search/cubit/search_cubit.dart';
-import 'package:meochill/screens/search/cubit/search_state.dart';
-import 'package:meochill/screens/search/widget/main_card.dart';
-import 'package:meochill/screens/search/widget/search_tiltle.dart';
+import 'package:meochill/widget/screens/search/cubit/search_cubit.dart';
+import 'package:meochill/widget/screens/search/cubit/search_state.dart';
+import 'package:meochill/widget/screens/search/widget/main_card.dart';
+import 'package:meochill/widget/screens/search/widget/search_tiltle.dart';
 
 
  

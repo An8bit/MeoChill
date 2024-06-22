@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:meochill/repostsitories/log.dart';
@@ -7,36 +7,12 @@ import 'constant.dart';
 
 class MongoService implements Api {
 
-  
   static var db;
   MongoService(LogApp read);
   late DbCollection collection;
-  
-  @override
-  Future<List<Map<String, dynamic>>> getListActor() {
-    // TODO: implement getListActor
-=======
 
-import 'package:meochill/models/loginmodel.dart';
-import 'package:meochill/models/movie.dart';
-import 'package:meochill/repostsitories/api.dart';
-import 'package:meochill/repostsitories/contanst.dart';
-import 'package:meochill/repostsitories/log.dart';
-import 'package:mongo_dart/mongo_dart.dart';
-
-class MongoService implements Api {
-  static var db;
-  MongoService(LogApp read);
 
   @override
-  Future<void> checkLogin(Loginmodel login) {
-    // TODO: implement checkLogin
->>>>>>> origin/navigationthuan2
-    throw UnimplementedError();
-  }
-
-  @override
-<<<<<<< HEAD
   Future<List<Map<String, dynamic>>> getListDetails() async {
     return await db.collection(CATEGORY_COLLECTION).find().toList();
   }
@@ -70,23 +46,9 @@ class MongoService implements Api {
   }
   
   @override
-=======
->>>>>>> origin/navigationthuan2
   Future<void> conNect() async {
     db = await Db.create(DATABASE_DATA_API);
     await db.open();
-  }
-<<<<<<< HEAD
-=======
-
-  @override
-  Future<List<Movie>> getTopTrending() async {
-    var collectionMovies = await db.collection(MOVIES_COLLECTION);
-    //truy van lon hon 5000 view
-    List<Map<String, dynamic>> list =
-        await collectionMovies.find(where.gte('view', 4999)).toList();
-    List<Movie> movies = list.map((json) => Movie.fromJson(json)).toList();
-    return movies;
   }
 
   @override
@@ -110,5 +72,21 @@ class MongoService implements Api {
       return [];
     }
   }
->>>>>>> origin/navigationthuan2
+
+  @override
+  Future<List<Map<String, dynamic>>> getListActor() {
+    // TODO: implement getListActor
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Movie>> getTopTrending() async {
+     var collectionMovies = await db.collection(MOVIES_COLLECTION);
+    //truy van lon hon 5000 view
+    List<Map<String, dynamic>> list =
+        await collectionMovies.find(where.gte('view', 4999)).toList();
+    List<Movie> movies = list.map((json) => Movie.fromJson(json)).toList();
+    return movies;
+  }
+  
 }

@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/size_contanst.dart';
-import 'package:meochill/screens/search/cubit/search_cubit.dart';
-import 'package:meochill/screens/search/cubit/search_state.dart';
-import 'package:meochill/screens/search/widget/search_ideal.dart';
-import 'package:meochill/screens/search/widget/search_result.dart';
+import 'package:meochill/widget/screens/search/cubit/search_cubit.dart';
+import 'package:meochill/widget/screens/search/cubit/search_state.dart';
+import 'package:meochill/widget/screens/search/widget/search_ideal.dart';
+import 'package:meochill/widget/screens/search/widget/search_result.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

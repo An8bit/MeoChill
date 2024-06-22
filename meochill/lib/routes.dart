@@ -1,25 +1,19 @@
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:meochill/widget/screens/home/home_screen.dart';
+import 'package:meochill/widget/screens/details/details_screen.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
 import 'package:meochill/widget/screens/register/register_screen.dart';
-=======
-import 'package:meochill/screens/home/home2_screen.dart';
-
-import 'package:meochill/screens/Splash/splash.dart';
-import 'package:meochill/screens/login/login_screen.dart';
-import 'package:meochill/screens/login/register_screen.dart';
->>>>>>> origin/navigationthuan2
-
+import 'package:meochill/widget/screens/splash/splash.dart';
+import 'package:meochill/widget/screens/details/details_screen.dart';
 Route<dynamic>? mainRoute (RouteSettings settings)=> switch(settings.name){
        
-    LoginScreen.route => MaterialPageRoute(builder: (context)=> const LoginScreen()),
-  
+    LoginScreen.route => MaterialPageRoute(builder: (context)=>  LoginScreen()),
+   // MovieDetailScreen.route => MaterialPageRoute(builder: (context)=>  MovieDetailScreen()),
     RegisterScreen.route => MaterialPageRoute(builder: (context)=> RegisterScreen()),
     
-    splash_Screen.route=>MaterialPageRoute(builder: (context)=>splash_Screen()),
-    HomeScreen2.route=>MaterialPageRoute(builder: (context)=>HomeScreen2()),
+    SplashScreen.route=>MaterialPageRoute(builder: (context)=>SplashScreen()),
+    HomeScreen.route=>MaterialPageRoute(builder: (context)=>HomeScreen()),
     
-    _ => MaterialPageRoute(builder: (context)=>  splash_Screen())
+    _ => MaterialPageRoute(builder: (context)=>  SplashScreen())
 };

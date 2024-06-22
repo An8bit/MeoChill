@@ -56,25 +56,8 @@ class ApiImpl implements Api {
   }
   
   @override
-<<<<<<< HEAD
-=======
-  Future<void> checkLogin(Loginmodel login) {
-    // TODO: implement checkLogin
-    throw UnimplementedError();
-  }
-  
-  @override
->>>>>>> origin/navigationthuan2
   Future<void> conNect() {
     // TODO: implement conNect
-    throw UnimplementedError();
-  }
-<<<<<<< HEAD
-=======
-
-  @override
-  Future<List<Movie>> getTopTrending() {
-    // TODO: implement getTopTrending
     throw UnimplementedError();
   }
   
@@ -83,6 +66,13 @@ class ApiImpl implements Api {
     // TODO: implement getResultFilm
     throw UnimplementedError();
   }
->>>>>>> origin/navigationthuan2
+  
+  @override
+  Future<List<Movie>> getTopTrending() {
+    // TODO: implement getTopTrending
+    throw UnimplementedError();
+  }
+  
+ 
   
 }
