@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:meochill/main_cubit.dart';
 import 'package:meochill/repostsitories/MongoService.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -51,6 +52,31 @@ class SimpleBlocObsever extends BlocObserver {
     super.onClose(bloc);
     log.i(TAG, 'onClose: ${bloc.runtimeType}');
   }
+=======
+import 'package:meochill/cubit/main_cubit.dart';
+import 'package:meochill/repostsitories/MongoService.dart';
+import 'package:meochill/repostsitories/api.dart';
+
+
+import 'package:meochill/repostsitories/log.dart';
+import 'package:meochill/repostsitories/login_impl.dart';
+import 'package:meochill/routes.dart';
+import 'package:meochill/screens/home/home2_screen.dart';
+
+
+
+
+
+Future<void> main() async {
+
+
+
+
+  runApp(RepositoryProvider<LogApp>(
+    create: (context) => logimpl(),
+    child: Riponsitory(),
+  ));
+>>>>>>> origin/navigationthuan2
 }
 
 void main() async {
@@ -82,6 +108,7 @@ void main() async {
 class Repository extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return MultiRepositoryProvider(providers: [
       RepositoryProvider<Api>(
         //xài trực tiếp từ anh mongodb
@@ -92,6 +119,12 @@ class Repository extends StatelessWidget {
       //   create: (context) => ApiImpl(context.read<LogApp>()),
       // )
     ], child: Provider());
+=======
+    return RepositoryProvider<Api>(
+      create: (context) => MongoService(context.read<LogApp>()),
+      child: Provider(),
+    );
+>>>>>>> origin/navigationthuan2
   }
 }
 
@@ -108,10 +141,13 @@ class Provider extends StatelessWidget {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green
+      ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: mainRoute,
-      initialRoute: LoginScreen.route,
+      initialRoute: HomeScreen2.route,
       home: Scaffold(
         body: Center(
           child: Text('Hello vv World!'),

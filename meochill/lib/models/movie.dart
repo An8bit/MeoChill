@@ -1,9 +1,16 @@
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/country.dart';
 import 'package:meochill/models/episode.dart';
+<<<<<<< HEAD
 
 class Movie {
   String? id;
+=======
+import 'package:mongo_dart/mongo_dart.dart';
+
+class Movie {
+  ObjectId? id;
+>>>>>>> origin/navigationthuan2
   String? name;
   String? slug;
   String? originname;
