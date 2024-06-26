@@ -4,6 +4,7 @@ import 'package:meochill/models/movie2.dart';
 import 'package:card_swiper/card_swiper.dart';
 class filmScreen extends StatefulWidget {
   const filmScreen({super.key});
+
   @override
   State<filmScreen> createState() => _filmScreenState();
 }
@@ -75,7 +76,7 @@ class _filmScreenState extends State<filmScreen> {
 
   Padding TitleBody(String title) {
     return   Padding(
-           padding:  EdgeInsets.symmetric(horizontal: 16.0), //
+           padding:  const EdgeInsets.symmetric(horizontal: 16.0), //
           child:   Text(
             title,
             style: const TextStyle(
