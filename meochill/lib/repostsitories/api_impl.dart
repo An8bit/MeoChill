@@ -73,6 +73,12 @@ class ApiImpl implements Api {
     throw UnimplementedError();
   }
   
+  @override
+  Future<List<Movie>> getTypeMovie(String type) {
+    // TODO: implement getTypeMovie
+    throw UnimplementedError();
+  }
+  
  
   
 }

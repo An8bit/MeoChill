@@ -89,4 +89,19 @@ class MongoService implements Api {
     return movies;
   }
   
+  @override
+  Future<List<Movie>> getTypeMovie(String type) async {
+     var collectionMovies = await db.collection(MOVIES_COLLECTION);
+     List<Map<String, dynamic>>  listmovies =[];
+     listmovies= await collectionMovies.find(where.eq('type',type )).toList();
+     if(listmovies.isEmpty){
+      return [];
+     }
+     else{
+          List<Movie> movies = listmovies.map((json) => Movie.fromJson(json)).toList();
+      return movies;
+     }
+     
+  }
+  
 }

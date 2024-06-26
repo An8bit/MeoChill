@@ -1,0 +1,1 @@
+enum TypeMovies{Null,hanhdong,hai,chinhkich,lichsu,bian,gaycan,tinhcam,phieuluu,hinhsu,giadinh,kinhdi,langman,chientranh,cotrang,hoathinh,tailieu,giatuong,nhac,khoahocvientuong,tamly,mientay}

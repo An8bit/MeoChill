@@ -8,6 +8,7 @@ import 'package:meochill/widget/screens/search/cubit/search_cubit.dart';
 import 'package:meochill/widget/screens/search/cubit/search_state.dart';
 import 'package:meochill/widget/screens/search/widget/search_ideal.dart';
 import 'package:meochill/widget/screens/search/widget/search_result.dart';
+import 'package:meochill/widget/screens/sort/tab_controller.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

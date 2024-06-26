@@ -12,4 +12,5 @@ abstract class Api{
   Future<List<Map<String,dynamic>>> getMoviesResult();
   Future<List<Movie>> getTopTrending();
   Future<List<Movie>> getResultFilm(String query);
+  Future<List<Movie>> getTypeMovie(String type);
 }
