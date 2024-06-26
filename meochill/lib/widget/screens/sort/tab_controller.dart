@@ -29,25 +29,25 @@ DefaultTabController Main() {
              Tab(
               child: Text(
                 "Hoạt Hình ",
-                style: TextStyle(color: Colors.white),
+               
               ),
             ),
              Tab(
               child: Text(
                 "Hành Động",
-                style: TextStyle(color: Colors.white),
+                
               ),
             ),
              Tab(
               child: Text(
                 "Hài Kịch",
-                style: TextStyle(color: Colors.white),
+                
               ),
             ),
              Tab(
               child: Text(
                 "Tinh Cảm",
-                style: TextStyle(color: Colors.white),
+                
               ),
             ),
           ],

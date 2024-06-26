@@ -8,6 +8,7 @@ import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
 import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
+
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
   static const String TAG = 'Bloc';
@@ -107,22 +108,22 @@ class Provider extends StatelessWidget {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      darkTheme: ThemeData(
-        primarySwatch: Colors.amber,
-        brightness: Brightness.dark,
-      ),
-      theme: ThemeData(
-        primarySwatch: Colors.green
-      ),
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: mainRoute,
-      initialRoute:HomeScreen.route,
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello vv World!'),
-        ),
-      ),
-    );
+    return SafeArea(child: BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        return MaterialApp(
+          darkTheme: ThemeData.dark(),
+          theme: ThemeData.light(),
+          themeMode: state.isLightTheme ? ThemeMode.dark : ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: mainRoute,
+          initialRoute: HomeScreen.route,
+          home: const Scaffold(
+            body: Center(
+              child: Text('Hello vv World!'),
+            ),
+          ),
+        );
+      },
+    ));
   }
 }

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:meochill/models/movie2.dart';
 import 'package:card_swiper/card_swiper.dart';
+
+import '../search/search_screen.dart';
 class filmScreen extends StatefulWidget {
   const filmScreen({super.key});
   @override
@@ -25,7 +27,12 @@ class _filmScreenState extends State<filmScreen> {
         title: const Text("Movies World"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (ctx) => const SearchScreen()));
+            },
             icon: const Icon(Icons.search),
           ),
         ],

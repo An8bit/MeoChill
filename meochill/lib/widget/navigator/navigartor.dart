@@ -44,12 +44,11 @@ class _HomeScreen2State extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final darkMode = THelperFunctions.isDarkMode(context);
+    
     return  Scaffold(
       body:_Screens[_selectedIndex],
       bottomNavigationBar: NavigationBar(
-        elevation:10 ,
-        backgroundColor: darkMode ? Colors.black : Colors.white,
+        elevation:10 ,       
         selectedIndex: _selectedIndex,
         destinations: _destinations,
         onDestinationSelected: (value){
