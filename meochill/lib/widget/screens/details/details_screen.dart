@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:meochill/models/movie2.dart';
+import 'package:meochill/widget/screens/details/Comment.dart';
 
-class MovieDetailScreen extends StatelessWidget {
+class MovieDetailScreen extends StatelessWidget { 
+   MovieDetailScreen({super.key});
+
+
   static const String route = "MovieDetailScreen";
 
-  final Movie movie;
+  // final Movie movie;
 
-  MovieDetailScreen({required this.movie});
+  // MovieDetailScreen({required this.movie});
 
   final List<String> otherMovies = [
     "Tom Holland",
@@ -19,20 +22,30 @@ class MovieDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(movie.title),
+        title: Text("nguoi nhen"),
         backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MovieHeader(imageUrl: movie.imageUrl),
-            MovieInfo(movie: movie),
-            MovieDescription(description: movie.additionalInfo ?? 'No additional information available'),
+            MovieHeader(imageUrl: "assets/spiderman.jpg"),
+           // MovieInfo(movie: "nguoi nhen"),
+           // MovieDescription( "nguoi nhen"?? 'No additional information available'),
             EpisodeGrid(),  // Thêm widget này vào Column để hiển thị các tập phim
             OtherMovies(otherMovies: otherMovies),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => CommentSection(),
+          );
+        },
+        child: Icon(Icons.comment),
+        backgroundColor: Colors.blue,
       ),
     );
   }
@@ -62,9 +75,9 @@ class MovieHeader extends StatelessWidget {
 }
 
 class MovieInfo extends StatelessWidget {
-  final Movie movie;
+  // final Movie movie;
 
-  MovieInfo({required this.movie});
+  // MovieInfo({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +86,8 @@ class MovieInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(movie.title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          Text(movie.rating, style: TextStyle(fontSize: 18, color: Colors.grey)),
+          Text("Venom Let There Be Carnage", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          Text("'6.4/10 IMDb", style: TextStyle(fontSize: 18, color: Colors.grey)),
           Wrap(
             spacing: 10,
             children: [
@@ -93,16 +106,16 @@ class MovieInfo extends StatelessWidget {
 }
 
 class MovieDescription extends StatelessWidget {
-  final String description;
+  // final String description;
 
-  MovieDescription({required this.description});
+  // MovieDescription({required this.description});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Text(
-        description,
+        "hay",
         style: TextStyle(fontSize: 16),
       ),
     );

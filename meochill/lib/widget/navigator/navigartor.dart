@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:meochill/widget/screens/category/category_screen.dart';
+import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/screens/home/home_screen.dart';
+import 'package:meochill/widget/screens/profile/setting_screen.dart';
 import 'package:meochill/widget/screens/search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,14 +27,14 @@ class _HomeScreen2State extends State<HomeScreen> {
    final _destinations = [
         const NavigationDestination(icon: Icon(Icons.home), label: 'home'),
         const NavigationDestination(icon: Icon(Icons.search), label: 'search'),
-        const NavigationDestination(icon: Icon(Icons.category), label: 'category'),
+        const NavigationDestination(icon: Icon(Icons.favorite), label: 'favorite'),
         const NavigationDestination(icon: Icon(Icons.settings), label: 'setting'),
    ];
    final _Screens = const [
      Expanded(child: filmScreen()),
      SearchScreen(),
-     Center(child: Text('Catogories Screen '),),
-     Center(child: Text('Settings Screen '),),
+     MyfavoriteScreen(),
+    SettingScreen()
    ];
 
 

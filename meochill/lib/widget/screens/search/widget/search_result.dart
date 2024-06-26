@@ -34,6 +34,7 @@ class SearchResult extends StatelessWidget {
                  return  MainCard(
                   id: "id",
                   imageUrl:movie.thumburl ?? 'default_image_url',
+                  movie: movie,
                 );
               }),
             );

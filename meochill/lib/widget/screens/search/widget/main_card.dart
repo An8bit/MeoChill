@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:meochill/models/movie.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
+import 'package:meochill/widget/screens/details/details_screen.dart';
 
 class MainCard extends StatelessWidget {
+  
   final String imageUrl;
   final String id;
-  const MainCard({Key? key, required this.imageUrl, required this.id})
+  final Movie movie;
+  const MainCard({Key? key, required this.imageUrl, required this.id,required this.movie})
       : super(key: key);
 
   @override
@@ -14,8 +18,8 @@ class MainCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (ctx) => const HomeScreen(
-                     )));
+                builder: (ctx) => MovieDetailScreen() 
+                     ));
       },
       child: Container(
         decoration: BoxDecoration(

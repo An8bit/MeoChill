@@ -4,7 +4,6 @@ import 'package:meochill/models/movie2.dart';
 import 'package:card_swiper/card_swiper.dart';
 class filmScreen extends StatefulWidget {
   const filmScreen({super.key});
-
   @override
   State<filmScreen> createState() => _filmScreenState();
 }
