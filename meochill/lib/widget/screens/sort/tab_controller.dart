@@ -5,7 +5,7 @@ import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/screens/sort/cubit/sort_cubit.dart';
 import 'package:meochill/widget/screens/sort/cubit/sort_state.dart';
 import 'package:meochill/widget/screens/sort/widget/main_sort_screen.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomTabBar extends StatelessWidget {
   const CustomTabBar({Key? key});
@@ -21,10 +21,12 @@ class CustomTabBar extends StatelessWidget {
 
 DefaultTabController Main() {
   return DefaultTabController(
-    length: 4,
+    length: 8,
+   
     child: Scaffold(
       appBar: AppBar(
         bottom: const TabBar(
+          isScrollable: true,
           tabs: [
              Tab(
               child: Text(
@@ -50,15 +52,44 @@ DefaultTabController Main() {
                 
               ),
             ),
+            Tab(
+              child: Text(
+                "Tâm Lý",
+                
+              ),
+            ),
+            Tab(
+              child: Text(
+                "Hình Sự",
+                
+              ),
+            ),
+            Tab(
+              child: Text(
+                "Thể Thao",
+                
+              ),
+            ),
+            Tab(
+              child: Text(
+                "Bí Ẩn",
+                
+              ),
+            ),
           ],
         ),
       ),
+     
       body:const TabBarView(
         children:  [
           TabContent(tabType: "Hành Động"),
           TabContent(tabType: "Phiêu Lưu"),
           TabContent(tabType: "Hài Hước"),
           TabContent(tabType: "Tình Cảm"),
+          TabContent(tabType: "Tâm Lý"),
+          TabContent(tabType: "Hình Sự"),
+          TabContent(tabType: "Thê Thao"),
+          TabContent(tabType: "Bí Ẩn"),
         ],
       ),
     ),
@@ -79,7 +110,10 @@ class TabContent extends StatelessWidget {
       child: BlocBuilder<SortCubit, SortState>(
         builder: (context, state) {
           if (state.loadStatus == LoadStatus.Loading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: SpinKitPouringHourGlassRefined(
+              color: Colors.blue,
+              size: 50.0,
+            ));
           } else if (state.loadStatus == LoadStatus.Error) {
             return const Center(child: Text('Error'));
           } else {
