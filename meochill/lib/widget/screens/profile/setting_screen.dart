@@ -11,7 +11,6 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileScreen();
-    
   }
 }
 
@@ -23,31 +22,21 @@ class ButtonDarkLight extends StatefulWidget {
 }
 
 class _ButtonDarkLightState extends State<ButtonDarkLight> {
-  bool _selected = false;
-  final bool _enabled = true;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        var isLightTheme = state.isLightTheme;
         return ListTile(
             title: Text('Chế độ tối'),
-            enabled: _enabled,
-            selected: _selected,
+            enabled: true, // Bạn có thể đặt trực tiếp true nếu không thay đổi
             onTap: () {
-              setState(() {
-                _selected = !_selected;
-              });
+              // Nếu bạn muốn xử lý thêm gì đó khi ListTile được tap, thực hiện ở đây
             },
             trailing: Switch(
-              value: _selected,
+              value: state.isLightTheme, // Dùng trực tiếp từ state
               onChanged: (bool value) {
-                setState(() {
-                  isLightTheme = value;
-                  context.read<MainCubit>().setTheme(isLightTheme);
-                  _selected = value;
-                });
+                // Thay đổi theme bằng cách gọi Cubit
+                context.read<MainCubit>().setTheme(value);
               },
             ));
       },
@@ -59,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   //backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       body: ListView(
         children: [
           Padding(
