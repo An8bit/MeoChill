@@ -28,19 +28,19 @@ DefaultTabController Main() {
           tabs: [
              Tab(
               child: Text(
-                "Hoạt Hình ",
+                "Hành Động",
                
               ),
             ),
              Tab(
               child: Text(
-                "Hành Động",
+                "Phiêu Lưu",
                 
               ),
             ),
              Tab(
               child: Text(
-                "Hài Kịch",
+                "Hài Hước",
                 
               ),
             ),
@@ -55,10 +55,10 @@ DefaultTabController Main() {
       ),
       body:const TabBarView(
         children:  [
-          TabContent(tabType: "hoathinh"),
-          TabContent(tabType: "hanhdong"),
-          TabContent(tabType: "hai"),
-          TabContent(tabType: "tinhcam"),
+          TabContent(tabType: "Hành Động"),
+          TabContent(tabType: "Phiêu Lưu"),
+          TabContent(tabType: "Hài Hước"),
+          TabContent(tabType: "Tình Cảm"),
         ],
       ),
     ),
@@ -73,7 +73,7 @@ class TabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<SortCubit>(context);
-    cubit.getTypeMovie(tabType);
+    cubit.getListMovieByCate(tabType);
 
     return RefreshIndicator(
       child: BlocBuilder<SortCubit, SortState>(
@@ -89,7 +89,7 @@ class TabContent extends StatelessWidget {
           }
       ),
       onRefresh: () async {
-        cubit.getTypeMovie(tabType);
+        cubit.getListMovieByCate(tabType);
       },
     );
   }

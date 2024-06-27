@@ -1,3 +1,4 @@
+import 'package:meochill/models/category.dart';
 import 'package:meochill/models/loginmodel.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -6,11 +7,9 @@ import 'package:meochill/repostsitories/log.dart';
 import 'constant.dart';
 
 class MongoService implements Api {
-
   static var db;
   MongoService(LogApp read);
   late DbCollection collection;
-
 
   @override
   Future<List<Map<String, dynamic>>> getListDetails() async {
@@ -31,7 +30,6 @@ class MongoService implements Api {
 
   @override
   Future<bool> checkLogin(Loginmodel login) async {
-   
     var user_colection = await db.collection(USER_COLLECTION);
     var u = await user_colection.findOne(
         where.eq("username", login.username).eq("password", login.password));
@@ -44,7 +42,7 @@ class MongoService implements Api {
     // TODO: implement getMoviesResult
     throw UnimplementedError();
   }
-  
+
   @override
   Future<void> conNect() async {
     db = await Db.create(DATABASE_DATA_API);
@@ -54,18 +52,19 @@ class MongoService implements Api {
   @override
   Future<List<Movie>> getResultFilm(String query) async {
     var collectionMovies = await db.collection(MOVIES_COLLECTION);
-     List<Map<String, dynamic>>  listmovies =[];
-    List<String>filelds = ['name','slug','origin_name','content'];
-    for (String field in filelds){
-      var searchQuery = where.match(field, query,caseInsensitive: true);
-      listmovies = await  collectionMovies.find(searchQuery).toList();
-      if(listmovies.isNotEmpty){
+    List<Map<String, dynamic>> listmovies = [];
+    List<String> filelds = ['name', 'slug', 'origin_name', 'content'];
+    for (String field in filelds) {
+      var searchQuery = where.match(field, query, caseInsensitive: true);
+      listmovies = await collectionMovies.find(searchQuery).toList();
+      if (listmovies.isNotEmpty) {
         break;
       }
     }
-    
-    List<Movie> movies = listmovies.map((json) => Movie.fromJson(json)).toList();
-    
+
+    List<Movie> movies =
+        listmovies.map((json) => Movie.fromJson(json)).toList();
+
     if (listmovies.isNotEmpty) {
       return movies;
     } else {
@@ -81,27 +80,48 @@ class MongoService implements Api {
 
   @override
   Future<List<Movie>> getTopTrending() async {
-     var collectionMovies = await db.collection(MOVIES_COLLECTION);
+    var collectionMovies = await db.collection(MOVIES_COLLECTION);
     //truy van lon hon 5000 view
     List<Map<String, dynamic>> list =
         await collectionMovies.find(where.gte('view', 4999)).toList();
     List<Movie> movies = list.map((json) => Movie.fromJson(json)).toList();
     return movies;
   }
-  
+
   @override
   Future<List<Movie>> getTypeMovie(String type) async {
-     var collectionMovies = await db.collection(MOVIES_COLLECTION);
-     List<Map<String, dynamic>>  listmovies =[];
-     listmovies= await collectionMovies.find(where.eq('type',type )).toList();
-     if(listmovies.isEmpty){
+    var collectionMovies = await db.collection(MOVIES_COLLECTION);
+    List<Map<String, dynamic>> listmovies = [];
+    listmovies = await collectionMovies.find(where.eq('type', type)).toList();
+    if (listmovies.isEmpty) {
       return [];
-     }
-     else{
-          List<Movie> movies = listmovies.map((json) => Movie.fromJson(json)).toList();
+    } else {
+      List<Movie> movies =
+          listmovies.map((json) => Movie.fromJson(json)).toList();
       return movies;
-     }
-     
+    }
   }
-  
+
+  @override
+  Future<List<Movie>> getMovieByCategoryId(String category) async {
+    var collectionMovies = db.collection(MOVIES_COLLECTION);
+    String id = await getCategoryId(category);
+    List<Map<String, dynamic>> movies = await collectionMovies
+        .find(where.eq("category_ids", id))
+        .toList();
+    List<Movie> movie = movies.map((json) => Movie.fromJson(json)).toList();
+    return movie;
+  }
+
+  @override
+  Future<String> getCategoryId(String category) async {
+    var collectionCategory = db.collection(CATEGORY_COLLECTION);
+    var categoryData =
+        await collectionCategory.findOne(where.eq("name", category));
+    if (categoryData != null) {
+      return categoryData["id"].toString();
+    } else {
+      return "";
+    }
+  }
 }

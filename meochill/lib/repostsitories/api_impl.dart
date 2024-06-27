@@ -1,3 +1,4 @@
+import 'package:meochill/models/category.dart';
 import 'package:meochill/models/loginmodel.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -76,6 +77,18 @@ class ApiImpl implements Api {
   @override
   Future<List<Movie>> getTypeMovie(String type) {
     // TODO: implement getTypeMovie
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<Movie>> getMovieByCategoryId(String category) {
+    // TODO: implement getMovieByCategoryId
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> getCategoryId(String category) {
+    // TODO: implement getCategoryId
     throw UnimplementedError();
   }
   
