@@ -92,6 +92,12 @@ class ApiImpl implements Api {
     throw UnimplementedError();
   }
   
+  @override
+  Future<List<Movie>> getRecommandMovie() {
+    // TODO: implement getRecommandMovie
+    throw UnimplementedError();
+  }
+  
  
   
 }

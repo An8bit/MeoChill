@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/loginmodel.dart';
 import 'package:meochill/models/movie.dart';
@@ -123,5 +125,14 @@ class MongoService implements Api {
     } else {
       return "";
     }
+  }
+  
+  @override
+  Future<List<Movie>> getRecommandMovie() async {
+     var collectionMovies = await db.collection(MOVIES_COLLECTION);
+     int year = DateTime.now().year;  
+    List<Map<String,dynamic>> ListMovieDateYear = await collectionMovies.find(where.eq("year",year)).toList();
+    return ListMovieDateYear.map((json)=> Movie.fromJson(json)).toList();  
+    
   }
 }

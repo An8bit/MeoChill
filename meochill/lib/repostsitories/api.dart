@@ -16,5 +16,6 @@ abstract class Api{
   Future<List<Movie>> getTypeMovie(String type);
   Future<List<Movie>> getMovieByCategoryId(String categoryId);
   Future<String> getCategoryId(String category);
+  Future<List<Movie>> getRecommandMovie();
   
 }
