@@ -2,23 +2,25 @@
 import 'package:flutter/material.dart';
 import 'package:meochill/models/movie2.dart';
 import 'package:card_swiper/card_swiper.dart';
+
 class filmScreen extends StatefulWidget {
-  const filmScreen({super.key});
+   const filmScreen({super.key});
+
   @override
   State<filmScreen> createState() => _filmScreenState();
 }
 
 class _filmScreenState extends State<filmScreen> {
-  
   final List<String> bannerUrls = [
     "https://img.ophim.live/uploads/movies/cach-cuop-ngan-hang-poster.jpg",
     "https://img.ophim.live/uploads/movies/joker-dien-co-doi-poster.jpg",
     "https://img.ophim.live/uploads/movies/lang-ma-am-poster.jpg"
   ];
-   
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    
     return Scaffold(
       
       appBar: AppBar(
@@ -88,7 +90,8 @@ class _filmScreenState extends State<filmScreen> {
         
   }
 }
- SingleChildScrollView ListTopMovie() {
+
+SingleChildScrollView ListTopMovie() {
 
   final List<Movie> nowShowingMovies = [
     Movie(
