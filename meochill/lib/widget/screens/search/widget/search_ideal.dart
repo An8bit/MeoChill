@@ -35,9 +35,10 @@ class SearchIdelWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final movies = state.movies[index];
                 return TopSearchItemTitle(
-                  id: "no ",
+                  id: "no",
                   imageUrl: movies.posterurl!,
                   title: movies.name!,
+                  movie: movies,
                 );
               });
         }

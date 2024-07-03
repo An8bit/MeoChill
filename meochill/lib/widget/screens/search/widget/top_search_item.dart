@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/size_contanst.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/details/details_screen.dart';
 
 class TopSearchItemTitle extends StatelessWidget {
-  const TopSearchItemTitle({super.key, required this.id, required this.imageUrl, required this.title});
+  const TopSearchItemTitle({super.key, required this.id, required this.imageUrl, required this.title,required this.movie});
    final String id;
     final String imageUrl;
     final String title;
+    final Movie movie;
   @override
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
@@ -16,7 +18,7 @@ class TopSearchItemTitle extends StatelessWidget {
         GestureDetector(
           onTap: (){
             Navigator.push(
-              context,MaterialPageRoute(builder: (context)=> MovieDetailScreen()),
+              context,MaterialPageRoute(builder: (context)=> MovieDetailScreen(movie: movie,)),
             );
           },
           child:  Container(

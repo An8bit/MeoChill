@@ -18,7 +18,7 @@ class MainCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (ctx) => MovieDetailScreen() 
+                builder: (ctx) => MovieDetailScreen(movie: movie,) 
                      ));
       },
       child: Container(

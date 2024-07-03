@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:meochill/models/category.dart';
+import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/loginmodel.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -86,7 +87,9 @@ class MongoService implements Api {
     //truy van lon hon 5000 view
     List<Map<String, dynamic>> list =
         await collectionMovies.find(where.gte('view', 4999)).toList();
+      
     List<Movie> movies = list.map((json) => Movie.fromJson(json)).toList();
+      
     return movies;
   }
 
@@ -135,4 +138,20 @@ class MongoService implements Api {
     return ListMovieDateYear.map((json)=> Movie.fromJson(json)).toList();  
     
   }
+  
+  @override
+  Future<List<String>> getNameCategory(List<String> idcategory) async {
+    var collectionCategory = db.collection(CATEGORY_COLLECTION);
+    List<Map<String, dynamic>> list = await collectionCategory.find(where.oneFrom("id", idcategory)).toList();
+    List<String> categoryNames = list.map((json) => json["name"].toString()).toList();
+    return categoryNames;
+  }
+  
+  @override
+  Future<List<Episode>> getEpisode(ObjectId id) async {
+    var collectionEpisode = await db.collection(EPISODES_COLLECTION);
+    List<Map<String, dynamic>> list = await collectionEpisode.find(where.eq("movie_id", id)).toList();
+    List<Episode> episode = list.map((json) => Episode.fromJson(json)).toList();
+    return episode;
+}
 }

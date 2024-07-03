@@ -28,7 +28,7 @@ class Movie {
   int? view;
   List<String?>? actor;
   List<String?>? director;
-  List<Category?>? category;
+  List<String?>? category_ids;
   List<Country?>? country;
 
   Movie(
@@ -56,11 +56,11 @@ class Movie {
       this.view,
       this.actor,
       this.director,
-      this.category,
+      this.category_ids,
       this.country});
 
   Movie.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
+     id = json['_id'] ;
     name = json['name'];
     slug = json['slug'];
     originname = json['origin_name'];
@@ -95,10 +95,10 @@ class Movie {
       });
     }
 
-    if (json['category'] != null) {
-      category = <Category>[];
-      json['category'].forEach((v) {
-        category!.add(Category.fromJson(v));
+    if (json['category_ids'] != null) {
+      category_ids = <String>[];
+      json['category_ids'].forEach((v) {
+        category_ids!.add(v);
       });
     }
     if (json['country'] != null) {
@@ -111,7 +111,9 @@ class Movie {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['_id'] = id;
+   
+    
+      data['_id'] = id;
     data['name'] = name;
     data['slug'] = slug;
     data['origin_name'] = originname;
@@ -137,8 +139,8 @@ class Movie {
         actor ;
     data['director'] =
         director ;
-    data['category'] =
-        category != null ? category!.map((v) => v?.toJson()).toList() : null;
+    data['category_ids'] =
+        category_ids ;
     data['country'] =
         country != null ? country!.map((v) => v?.toJson()).toList() : null;
     return data;

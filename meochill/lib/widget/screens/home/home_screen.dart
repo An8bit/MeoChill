@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
-
 import 'package:card_swiper/card_swiper.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/screens/home/cubit/home_cubit.dart';
 import 'package:meochill/widget/screens/home/widget/list_home_movie.dart';
-
 import '../../../models/movie.dart';
 import '../search/search_screen.dart';
 

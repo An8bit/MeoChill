@@ -1,4 +1,6 @@
+import 'package:bson/src/classes/object_id.dart';
 import 'package:meochill/models/category.dart';
+import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/loginmodel.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -95,6 +97,18 @@ class ApiImpl implements Api {
   @override
   Future<List<Movie>> getRecommandMovie() {
     // TODO: implement getRecommandMovie
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<String>> getNameCategory(List<String> idcategory) {
+    // TODO: implement getNameCategory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Episode>> getEpisode(ObjectId id) {
+    // TODO: implement getEpisode
     throw UnimplementedError();
   }
   
