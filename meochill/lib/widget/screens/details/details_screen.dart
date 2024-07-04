@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/widget/screens/details/Comment.dart';
 import 'package:meochill/widget/screens/details/cubit/details_cubit.dart';
+import 'package:meochill/widget/screens/details/video_screen.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../common/enum/load_status.dart';
@@ -192,11 +193,20 @@ class EpisodeGrid extends StatelessWidget {
             ),
             itemCount: state.episodes.first.serverdata?.length ?? 1, // Số lượng tập từ 1 đến 12
             itemBuilder: (BuildContext context, int index) {
-              return Card(
-                child: Center(
-                  child: Text('Tập ${index + 1}'),
+              final String link = state.episodes.first.serverdata?[index].link_embed ?? 'Unknown';
+              final String episodenumber = state.episodes.first.serverdata?[index].slug ?? 'Unknown';
+                return GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => VideoScreen(link:link ,episode: episodenumber)),);
+                  // Handle tap event here
+                  print('Tapped on episode ${state.episodes.first.serverdata?[index].link_embed ?? 'Unknown'}');
+                },
+                child: Card(
+                  child: Center(
+                  child: Text('Tập ${episodenumber}'),
+                  ),
                 ),
-              );
+                );
             },
           ),
         );
