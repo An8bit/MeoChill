@@ -12,6 +12,7 @@ class CustomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocProvider(
       create: (context) => SortCubit(context.read<Api>()),
       child: Main(),
@@ -20,12 +21,14 @@ class CustomTabBar extends StatelessWidget {
 }
 
 DefaultTabController Main() {
+  
   return DefaultTabController(
     length: 8,
    
     child: Scaffold(
       appBar: AppBar(
         bottom: const TabBar(
+          
           isScrollable: true,
           tabs: [
              Tab(

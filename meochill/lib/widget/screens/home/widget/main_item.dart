@@ -40,20 +40,22 @@ class MainItem extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.all(2.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Text(
                   movie.name!,
                   style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: 20, //
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis, 
+                   maxLines: 1,
+                
                 ),
               ),
             ],
           ),
-          
         );
       },
     );
-      
-    
   }
 }
