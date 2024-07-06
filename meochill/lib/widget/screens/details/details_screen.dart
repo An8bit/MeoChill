@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meochill/widget/screens/details/Comment.dart';
+import 'package:meochill/widget/screens/details/comment.dart';
 import 'package:meochill/widget/screens/details/cubit/details_cubit.dart';
 import 'package:meochill/widget/screens/details/video_screen.dart';
 import 'package:readmore/readmore.dart';

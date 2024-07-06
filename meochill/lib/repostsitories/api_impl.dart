@@ -1,7 +1,7 @@
 import 'package:bson/src/classes/object_id.dart';
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/episode.dart';
-import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/account.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
@@ -50,7 +50,7 @@ class ApiImpl implements Api {
   }
   
   @override
-  Future<bool> checkLogin(Loginmodel login) async {
+  Future<bool> checkLogin(Account login) async {
     await delay();
     if(login.username == 1 && login.password ==1) {
       return Future(() => true);

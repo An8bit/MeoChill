@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
-import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/account.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/common_widgets/noti_bar.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
@@ -89,7 +89,7 @@ class LoginButton extends StatelessWidget {
 }
 
 class FormLogin extends StatelessWidget {
-  Loginmodel login = Loginmodel();
+  Account login = Account();
 
   @override
   Widget build(BuildContext context) {

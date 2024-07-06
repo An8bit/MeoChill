@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/episode.dart';
-import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/account.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:mongo_dart/mongo_dart.dart';
@@ -32,7 +32,7 @@ class MongoService implements Api {
   }
 
   @override
-  Future<bool> checkLogin(Loginmodel login) async {
+  Future<bool> checkLogin(Account login) async {
     var user_colection = await db.collection(USER_COLLECTION);
     var u = await user_colection.findOne(
         where.eq("username", login.username).eq("password", login.password));
