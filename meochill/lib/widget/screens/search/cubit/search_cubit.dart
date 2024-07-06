@@ -28,7 +28,7 @@ class SearchCubit extends Cubit<SearchState> {
     }
     catch(ex){
       emit(state.copyWith(loadStatus: LoadStatus.Error));
-     print("heheheh");
+     print("Error in getTypeMovie: $ex");
     }
     
   }
@@ -48,6 +48,7 @@ class SearchCubit extends Cubit<SearchState> {
      }
      catch(ex){
            emit(state.copyWith(loadStatus: LoadStatus.Error,resultsFilm: false,));
+           print("Error in getTypeMovie: $ex");
      }
 
   }
