@@ -55,7 +55,10 @@ class MainItem extends StatelessWidget {
                   movie.name!,
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                 ),
+                
               ),
             ],
           ),
