@@ -1,12 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:meochill/widget/screens/category/category_screen.dart';
-import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/screens/home/home_screen.dart';
 import 'package:meochill/widget/screens/profile/setting_screen.dart';
 import 'package:meochill/widget/screens/search/search_screen.dart';
 import 'package:meochill/widget/screens/sort/sort_screen.dart';
+
+import '../screens/favorite/favorite_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route  = "HomeScreen2";
@@ -37,7 +36,7 @@ class _HomeScreen2State extends State<HomeScreen> {
      Expanded(child: filmScreen()),
      SearchScreen(),
      SortScreen(),
-     MyfavoriteScreen(),
+     MyFavoriteScreen(),
     SettingScreen()
    ];
 
