@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
-import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/account.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/common_widgets/noti_bar.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
@@ -51,7 +51,7 @@ class Page extends StatelessWidget {
           const SizedBox(
             height: 80,
           ),
-          LoginButton(),
+          const LoginButton(),
           //chia khoảng cách cột  và chứ các cái pass hay email gì đó tự coi code la hiểu
           FormLogin()
         ],
@@ -60,7 +60,9 @@ class Page extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
+class  LoginButton extends StatelessWidget {
+  const LoginButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Padding(
@@ -89,7 +91,9 @@ class LoginButton extends StatelessWidget {
 }
 
 class FormLogin extends StatelessWidget {
-  Loginmodel login = Loginmodel();
+  Account login = Account();
+
+  FormLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +131,15 @@ class FormLogin extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(35),
+                padding:const  EdgeInsets.all(35),
                 child: Column(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Color.fromRGBO(225, 95, 27, .3),
                             blurRadius: 20,
@@ -146,14 +150,14 @@ class FormLogin extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(color: Colors.grey),
                               ),
                             ),
                             child: TextField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Phone Or Email",
                                 hintStyle: TextStyle(color: Colors.grey),
                                 border: InputBorder.none,
@@ -162,14 +166,14 @@ class FormLogin extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(color: Colors.grey),
                               ),
                             ),
                             child: TextField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Password",
                                 hintStyle: TextStyle(color: Colors.grey),
                                 border: InputBorder.none,
@@ -181,11 +185,11 @@ class FormLogin extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    Text(
+                    const Text(
                       "Forgot Password ???",
                       style: TextStyle(color: Colors.grey),
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     SizedBox(
                       height: 50,
                       width: double.infinity,
@@ -195,7 +199,7 @@ class FormLogin extends StatelessWidget {
                           context.read<LoginCubit>().checkLogin(login);
                         },
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54),
+                          side: const BorderSide(color: Colors.black54),
                         ),
                         child: const Text(
                           "Login",
@@ -207,7 +211,7 @@ class FormLogin extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40),
+                     const SizedBox(height: 40),
                     SizedBox(
                       height: 50,
                       width: double.infinity,
@@ -216,7 +220,7 @@ class FormLogin extends StatelessWidget {
                           Navigator.of(context).pushNamed(RegisterScreen.route);
                         },
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54),
+                          side: const BorderSide(color: Colors.black54),
                         ),
                         child: const Text(
                           "Register",

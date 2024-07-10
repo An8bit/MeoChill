@@ -1,13 +1,15 @@
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/episode.dart';
-import 'package:meochill/models/loginmodel.dart';
+import 'package:meochill/models/account.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 import '../models/movie.dart';
 
 abstract class Api{
   Future<void> conNect();
-  Future<bool> checkLogin(Loginmodel login);
+  Future<bool> checkLogin(Account login);
+  Future<bool> registerAccount(Account account);
+  Future<bool>checkAccount(Account account);
   Future<List<Map<String, dynamic>>> getListMovie();
   Future<List<Map<String,dynamic>>> getListDetails();
   Future<List<Map<String,dynamic>>> getListActor();
