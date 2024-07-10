@@ -4,6 +4,8 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 import '../../../common/enum/drawer_item.dart';
 import '../../../main_cubit.dart';
+import 'package:meochill/widget/screens/profile/edditprofile_screen.dart';
+import 'package:meochill/widget/screens/profile/show_language.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -64,7 +66,10 @@ class ProfileScreen extends StatelessWidget {
                 Text('User 1', style: TextStyle(fontSize: 18)),
                 SizedBox(height: 10),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/editProfile'); // Use named route to navigate
+                  },
                   child: Text('Chỉnh sửa profile'),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -105,7 +110,9 @@ class ProfileScreen extends StatelessWidget {
           ListTile(
             title: Text('Ngôn ngữ'),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () {
+              showLanguageDialog(context);
+            },
           ),
           ButtonDarkLight(),
         ],
