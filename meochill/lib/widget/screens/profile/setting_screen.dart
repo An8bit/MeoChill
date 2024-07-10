@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:meochill/widget/screens/profile/edditprofile_screen.dart';
+import 'package:meochill/widget/screens/profile/show_language.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      
-      title: 'Profile',
-      theme: ThemeData(
-        brightness: Brightness.dark, // Enable dark mode
-        primarySwatch: Colors.red,
-      ),
-      home: ProfileScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Profile',
+        theme: ThemeData(
+          brightness: Brightness.dark, // Enable dark mode
+          primarySwatch: Colors.red,
+        ),
+        home: ProfileScreen(),
+        routes: {
+          '/editProfile': (context) =>
+              EdditprofileScreen(), // Named route for EditProfilePage
+        });
   }
 }
 
@@ -25,7 +28,6 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
-        
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -41,16 +43,22 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage('assets/venom.jpg'), // Replace with your image URL
+                  backgroundImage: AssetImage(
+                      'assets/venom.jpg'), // Replace with your image URL
                 ),
-                 SizedBox(height: 20),
+                SizedBox(height: 20),
                 Text('User 1', style: TextStyle(fontSize: 18)),
                 SizedBox(height: 10),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/editProfile'); // Use named route to navigate
+                  },
                   child: Text('Chỉnh sửa profile'),
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.white, backgroundColor: Colors.red, disabledForegroundColor: Colors.white.withOpacity(0.38),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.red,
+                    disabledForegroundColor: Colors.white.withOpacity(0.38),
                   ),
                 ),
               ],
@@ -86,7 +94,9 @@ class ProfileScreen extends StatelessWidget {
           ListTile(
             title: Text('Ngôn ngữ'),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () {
+              showLanguageDialog(context);
+            },
           ),
           ListTile(
             title: Text('Download Khi có wifi Wifi'),
