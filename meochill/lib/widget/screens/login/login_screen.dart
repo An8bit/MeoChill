@@ -35,28 +35,33 @@ class Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //nay la chỗ đổ màu cho giao diện bự
-        body: Container(
-      padding: EdgeInsets.symmetric(vertical: 30),
-      width: double.infinity,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-        Colors.black,
-        Colors.red,
-      ])),
-      //chỗ này chia cột dọc để ghi chữ login và welcome
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(
-            height: 80,
+      // Đổ màu cho giao diện lớn
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 30),
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+              Colors.black,
+              Colors.red,
+            ]),
           ),
-          LoginButton(),
-          //chia khoảng cách cột  và chứ các cái pass hay email gì đó tự coi code la hiểu
-          FormLogin()
-        ],
+          // Chia cột dọc để ghi chữ login và welcome
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(
+                height: 80,
+              ),
+              LoginButton(),
+              // Chia khoảng cách cột và chứa các ô input
+              FormLogin()
+            ],
+          ),
+        ),
       ),
-    ));
+    );
   }
 }
 
@@ -80,7 +85,7 @@ class LoginButton extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           SizedBox(
-            height: 20, // Add some space before the button
+            height: 20, // Thêm khoảng cách trước nút bấm
           ),
         ],
       ),
@@ -89,152 +94,152 @@ class LoginButton extends StatelessWidget {
 }
 
 class FormLogin extends StatelessWidget {
-  Account login = Account();
+  
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          if (state.loadStatus == LoadStatus.Error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content: Text("Lỗi", style: TextStyle(color: Colors.red))),
-            );
-          } else if (state.loadStatus == LoadStatus.Done) {
-            Navigator.of(context).pushNamed(HomeScreen.route);
-          }
-        },
-        builder: (context, state) {
-          if (state.loadStatus == LoadStatus.Loading) {
-            return
-             
-                const Center(
-                  child: SpinKitWave(
-                    color: Colors.blue,
-                    size: 50.0,
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state.loadStatus == LoadStatus.Error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Lỗi", style: TextStyle(color: Colors.red)),
+            ),
+          );
+        } else if (state.loadStatus == LoadStatus.Done) {
+          Navigator.of(context).pushNamed(HomeScreen.route);
+        }
+      },
+      builder: (context, state) {
+        if (state.loadStatus == LoadStatus.Loading) {
+          return const Center(
+            child: SpinKitWave(
+              color: Colors.blue,
+              size: 50.0,
+            ),
+          );
+        } else {
+          return Container(
+            margin: const EdgeInsets.only(top: 110), // Đẩy viền bao bọc lên trên
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(60),
+                topRight: Radius.circular(60),
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(35),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 0), // Đẩy ô input lên cao hơn
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(225, 95, 27, .3),
+                          blurRadius: 20,
+                          offset: Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Phone Or Email",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                            ),
+                           onChanged:  (value) => context.read<LoginCubit>().state.account.username = value,
+                            
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                            ),
+                            onChanged: (value) => context.read<LoginCubit>().state.account.password = value,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              
-          
-          } else {
-            return Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  topRight: Radius.circular(60),
-                ),
+                  const SizedBox(height: 15),
+                  Text(
+                    "Forgot Password ???",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  SizedBox(height: 40),
+                  SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        
+                        context.read<LoginCubit>().startLogin();
+                        context.read<LoginCubit>().checkLogin(state.account);
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: Colors.black54),
+                      ),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40),
+                  SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(RegisterScreen.route);
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: Colors.black54),
+                      ),
+                      child: const Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: Padding(
-                padding: EdgeInsets.all(35),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromRGBO(225, 95, 27, .3),
-                            blurRadius: 20,
-                            offset: Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(color: Colors.grey),
-                              ),
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Phone Or Email",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none,
-                              ),
-                              onChanged: (value) => login.username = value,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(color: Colors.grey),
-                              ),
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none,
-                              ),
-                              onChanged: (value) => login.password = value,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    Text(
-                      "Forgot Password ???",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(height: 40),
-                    SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          context.read<LoginCubit>().startLogin();
-                          context.read<LoginCubit>().checkLogin(login);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54),
-                        ),
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(RegisterScreen.route);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black54),
-                        ),
-                        child: const Text(
-                          "Register",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
-        },
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }

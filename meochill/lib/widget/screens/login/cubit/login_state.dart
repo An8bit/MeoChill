@@ -1,52 +1,47 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
-import 'package:bloc/bloc.dart';
-// ignore: unused_import
-import 'package:equatable/equatable.dart';
 import 'package:meochill/common/enum/load_status.dart';
+import 'package:meochill/models/account.dart'; // Đảm bảo đường dẫn này chính xác
 
 class LoginState {
   final LoadStatus loadStatus;
+  final Account account;
+  final String errorMessage;
 
   LoginState({
-    required this.loadStatus,
+    this.loadStatus = LoadStatus.Init,
+    required this.account,
+    this.errorMessage = '',
   });
 
-  LoginState.init({
-    this.loadStatus = LoadStatus.Init,
-  });
+  LoginState.init()
+      : loadStatus = LoadStatus.Init,
+        account = Account(), // Giả sử Account có constructor mặc định
+        errorMessage = '';
 
   LoginState copyWith({
     LoadStatus? loadStatus,
+    Account? account,
+    String? errorMessage,
   }) {
     return LoginState(
       loadStatus: loadStatus ?? this.loadStatus,
+      account: account ?? this.account,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  String toString() => 'LoginState(loadStatus: $loadStatus)';
+  String toString() => 'LoginState(loadStatus: $loadStatus, account: $account, errorMessage: $errorMessage)';
 
   @override
-  bool operator ==(covariant LoginState other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
-    return other.loadStatus == loadStatus;
+  
+    return other is LoginState &&
+      other.loadStatus == loadStatus &&
+      other.account == account &&
+      other.errorMessage == errorMessage;
   }
 
   @override
-  int get hashCode => loadStatus.hashCode;
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'loadStatus': loadStatus,
-    };
-  }
-
-  factory LoginState.fromMap(Map<String, dynamic> map) {
-    return LoginState(
-      loadStatus: map['loadStatus'] as LoadStatus,
-    );
-  }
+  int get hashCode => loadStatus.hashCode ^ account.hashCode ^ errorMessage.hashCode;
 }
