@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -6,6 +8,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/screens/home/cubit/home_cubit.dart';
 import 'package:meochill/widget/screens/home/widget/list_home_movie.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/movie.dart';
 import '../search/search_screen.dart';
 
@@ -34,7 +37,7 @@ class _filmScreenState extends State<filmScreen> {
   Scaffold Main(BuildContext context, Size size) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Movies World"),
+          title:  Text(S.of(context).pageHome),
           actions: [
             IconButton(
               onPressed: () {
@@ -100,8 +103,8 @@ ListTopMovie(context) {
                   ),
                 );
               } else {
-                return const Center(
-                  child: Text("error"),
+                return  Center(
+                  child: Text(S.of(context).errorMessage),
                 );
               }
             },

@@ -6,10 +6,10 @@ import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
 import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
-import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:meochill/generated/l10n.dart';
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
   static const String TAG = 'Bloc';
@@ -112,12 +112,32 @@ class App extends StatelessWidget {
     return SafeArea(child: BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return MaterialApp(
+          localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+     
+      supportedLocales: S.delegate.supportedLocales,
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode &&
+              supportedLocale.countryCode == locale?.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
+
+
+
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: mainRoute,
-          initialRoute: LoginScreen.route,
+          initialRoute: HomeScreen.route,
           home: const Scaffold(
             body: Center(
               child: Text('Hello vv World!'),
