@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:meochill/models/account.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
+import 'package:meochill/widget/screens/register/cubit/register_cubit.dart';
+import 'package:meochill/widget/screens/register/cubit/register_state.dart';
+
+import '../../../common/enum/load_status.dart';
+import '../../../repostsitories/api.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const String route = "RegisterScreen";
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => RegisterCubit(context.read<Api>()),
+      child: page(),
+    );
+  }
+}
+
+class page extends StatelessWidget {
+  const page({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

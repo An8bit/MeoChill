@@ -8,6 +8,8 @@ import '../models/movie.dart';
 abstract class Api{
   Future<void> conNect();
   Future<bool> checkLogin(Account login);
+  Future<bool> registerAccount(Account account);
+  Future<bool>checkAccount(Account account);
   Future<List<Map<String, dynamic>>> getListMovie();
   Future<List<Map<String,dynamic>>> getListDetails();
   Future<List<Map<String,dynamic>>> getListActor();

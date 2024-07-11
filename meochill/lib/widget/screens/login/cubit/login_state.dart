@@ -1,6 +1,8 @@
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/models/account.dart'; // Đảm bảo đường dẫn này chính xác
 
+import '../../../../models/account.dart';
+
 class LoginState {
   final LoadStatus loadStatus;
   final Account account;

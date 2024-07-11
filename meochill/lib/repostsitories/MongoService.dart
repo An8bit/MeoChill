@@ -34,8 +34,8 @@ class MongoService implements Api {
   @override
   Future<bool> checkLogin(Account login) async {
     var user_colection = await db.collection(USER_COLLECTION);
-    var u = await user_colection.findOne(
-        where.eq("username", login.username).eq("password", login.password));
+    var u = await user_colection
+        .findOne(where.eq("email", login.email).eq("password", login.password));
 
     return u != null;
   }
@@ -87,9 +87,9 @@ class MongoService implements Api {
     //truy van lon hon 5000 view
     List<Map<String, dynamic>> list =
         await collectionMovies.find(where.gte('view', 4999)).toList();
-      
+
     List<Movie> movies = list.map((json) => Movie.fromJson(json)).toList();
-      
+
     return movies;
   }
 
@@ -111,9 +111,8 @@ class MongoService implements Api {
   Future<List<Movie>> getMovieByCategoryId(String category) async {
     var collectionMovies = db.collection(MOVIES_COLLECTION);
     String id = await getCategoryId(category);
-    List<Map<String, dynamic>> movies = await collectionMovies
-        .find(where.eq("category_ids", id))
-        .toList();
+    List<Map<String, dynamic>> movies =
+        await collectionMovies.find(where.eq("category_ids", id)).toList();
     List<Movie> movie = movies.map((json) => Movie.fromJson(json)).toList();
     return movie;
   }
@@ -129,28 +128,31 @@ class MongoService implements Api {
       return "";
     }
   }
-  
+
   @override
   Future<List<Movie>> getRecommandMovie() async {
-     var collectionMovies = await db.collection(MOVIES_COLLECTION);
-     int year = DateTime.now().year;  
-    List<Map<String,dynamic>> ListMovieDateYear = await collectionMovies.find(where.eq("year",year)).toList();
-    return ListMovieDateYear.map((json)=> Movie.fromJson(json)).toList();  
-    
+    var collectionMovies = await db.collection(MOVIES_COLLECTION);
+    int year = DateTime.now().year;
+    List<Map<String, dynamic>> ListMovieDateYear =
+        await collectionMovies.find(where.eq("year", year)).toList();
+    return ListMovieDateYear.map((json) => Movie.fromJson(json)).toList();
   }
-  
+
   @override
   Future<List<String>> getNameCategory(List<String> idcategory) async {
     var collectionCategory = db.collection(CATEGORY_COLLECTION);
-    List<Map<String, dynamic>> list = await collectionCategory.find(where.oneFrom("id", idcategory)).toList();
-    List<String> categoryNames = list.map((json) => json["name"].toString()).toList();
+    List<Map<String, dynamic>> list =
+        await collectionCategory.find(where.oneFrom("id", idcategory)).toList();
+    List<String> categoryNames =
+        list.map((json) => json["name"].toString()).toList();
     return categoryNames;
   }
-  
+
   @override
   Future<List<Episode>> getEpisode(ObjectId id) async {
     var collectionEpisode = await db.collection(EPISODES_COLLECTION);
-    List<Map<String, dynamic>> list = await collectionEpisode.find(where.eq("movie_id", id)).toList();
+    List<Map<String, dynamic>> list =
+        await collectionEpisode.find(where.eq("movie_id", id)).toList();
     List<Episode> episode = list.map((json) => Episode.fromJson(json)).toList();
     return episode;
 }
@@ -163,5 +165,45 @@ class MongoService implements Api {
   print(accounts.first.email);
   return accounts;
 }
+
+
   
+
+  @override
+  Future<bool> registerAccount(Account account) async {
+    var collectionaccount = await db.collection(USER_COLLECTION);
+    try {
+      var existingUser = await collectionaccount.insertOne(<String, dynamic>{
+        "username": account.username,
+        "password": account.password,
+        "email": account.email ?? "",
+        "created_at": DateTime.now().toString(),
+        "updated_at": DateTime.now().toString(),
+        "favorite_id": null,
+        "premium": false,
+      });
+      if (existingUser.isSuccess) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (ex) {
+      print("error: $ex");
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> checkAccount(Account account) async {
+    var collectionaccount = await db.collection(USER_COLLECTION);
+    var resultmail =
+        await collectionaccount.find(where.eq("email", account.email)).toList();
+    if (resultmail.isEmpty) {
+      return false;
+    } else {
+      return true;
+      
+    }
+  }
+
 }

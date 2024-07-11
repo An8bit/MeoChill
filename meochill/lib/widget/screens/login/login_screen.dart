@@ -94,8 +94,6 @@ class LoginButton extends StatelessWidget {
 }
 
 class FormLogin extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -120,7 +118,8 @@ class FormLogin extends StatelessWidget {
           );
         } else {
           return Container(
-            margin: const EdgeInsets.only(top: 110), // Đẩy viền bao bọc lên trên
+            margin:
+                const EdgeInsets.only(top: 110), // Đẩy viền bao bọc lên trên
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -134,7 +133,8 @@ class FormLogin extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Container(
-                    margin: const EdgeInsets.only(top: 0), // Đẩy ô input lên cao hơn
+                    margin: const EdgeInsets.only(
+                        top: 0), // Đẩy ô input lên cao hơn
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -162,8 +162,11 @@ class FormLogin extends StatelessWidget {
                               hintStyle: TextStyle(color: Colors.grey),
                               border: InputBorder.none,
                             ),
-                           onChanged:  (value) => context.read<LoginCubit>().state.account.username = value,
-                            
+                            onChanged: (value) => context
+                                .read<LoginCubit>()
+                                .state
+                                .account
+                                .username = value,
                           ),
                         ),
                         Container(
@@ -179,7 +182,11 @@ class FormLogin extends StatelessWidget {
                               hintStyle: TextStyle(color: Colors.grey),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => context.read<LoginCubit>().state.account.password = value,
+                            onChanged: (value) => context
+                                .read<LoginCubit>()
+                                .state
+                                .account
+                                .password = value,
                           ),
                         ),
                       ],
@@ -196,8 +203,7 @@ class FormLogin extends StatelessWidget {
                     width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {
-                        
-                        context.read<LoginCubit>().startLogin();
+                        context.read<LoginCubit>().startLogin(state.account);
                         context.read<LoginCubit>().checkLogin(state.account);
                       },
                       style: OutlinedButton.styleFrom(

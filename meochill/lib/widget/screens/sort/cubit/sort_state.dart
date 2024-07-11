@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/models/movie.dart';
-import 'package:meochill/widget/screens/sort/cubit/sort_cubit.dart';
-import 'package:mongo_dart/mongo_dart.dart';
+
 import 'package:meochill/common/enum/category_item.dart';
  class SortState  {
 final List<Movie> movies;

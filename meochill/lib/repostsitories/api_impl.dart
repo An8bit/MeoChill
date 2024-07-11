@@ -113,11 +113,22 @@ class ApiImpl implements Api {
   }
   
   @override
+  Future<bool> registerAccount(Account account) {
+    // TODO: implement registerAccoun
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<bool> checkAccount(Account account) {
+    // TODO: implement checkAccount
+    throw UnimplementedError();
+  }
+  
+  @override
   Future<List<Account>> getListAccountByUserName(String email) {
     // TODO: implement getListAccountByUserName
     throw UnimplementedError();
   }
   
  
-  
 }

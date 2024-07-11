@@ -8,6 +8,7 @@ import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
 import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
+import 'package:meochill/widget/screens/login/login_screen.dart';
 
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
@@ -116,7 +117,7 @@ class App extends StatelessWidget {
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: mainRoute,
-          initialRoute: HomeScreen.route,
+          initialRoute: LoginScreen.route,
           home: const Scaffold(
             body: Center(
               child: Text('Hello vv World!'),
