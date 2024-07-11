@@ -154,4 +154,14 @@ class MongoService implements Api {
     List<Episode> episode = list.map((json) => Episode.fromJson(json)).toList();
     return episode;
 }
+
+  @override
+  Future<List<Account>> getListAccountByUserName(String email) async {
+  var collectionAccount = await db.collection(USER_COLLECTION);
+  List<Map<String, dynamic>> list = await collectionAccount.find(where.eq("email", email)).toList();
+  List<Account> accounts = list.map((json) => Account.fromJson(json)).toList();
+  print(accounts.first.email);
+  return accounts;
+}
+  
 }

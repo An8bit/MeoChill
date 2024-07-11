@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/widget/screens/sort/cubit/sort_state.dart';
 import 'package:meochill/repostsitories/api.dart';

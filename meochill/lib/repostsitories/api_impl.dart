@@ -112,6 +112,12 @@ class ApiImpl implements Api {
     throw UnimplementedError();
   }
   
+  @override
+  Future<List<Account>> getListAccountByUserName(String email) {
+    // TODO: implement getListAccountByUserName
+    throw UnimplementedError();
+  }
+  
  
   
 }

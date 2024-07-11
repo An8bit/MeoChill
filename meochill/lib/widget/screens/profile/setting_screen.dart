@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:meochill/common/enum/load_status.dart';
+import 'package:meochill/widget/screens/login/login_screen.dart';
+import 'package:meochill/widget/screens/profile/cubit/profile_cubit.dart';
+import 'package:meochill/widget/screens/profile/cubit/profile_state.dart';
 
-import '../../../common/enum/drawer_item.dart';
 import '../../../main_cubit.dart';
-import 'package:meochill/widget/screens/profile/edditprofile_screen.dart';
+
 import 'package:meochill/widget/screens/profile/show_language.dart';
+
+import '../../../repostsitories/api.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileScreen();
+    return BlocProvider(
+      create: (context) => ProfileCubit(context.read<Api>())..getListAccountByUserName(
+      "john_doe@edddxample1.com"
+      ),
+      child: ProfileScreen(),
+    );
   }
 }
 
@@ -51,72 +61,103 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.black,
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage(
-                      'assets/venom.jpg'), // Replace with your image URL
-                ),
-                SizedBox(height: 20),
-                Text('User 1', style: TextStyle(fontSize: 18)),
-                SizedBox(height: 10),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        context, '/editProfile'); // Use named route to navigate
-                  },
-                  child: Text('Chỉnh sửa profile'),
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.red,
-                    disabledForegroundColor: Colors.white.withOpacity(0.38),
+      body: Listinfomation(),
+    );
+  }
+}
+
+class Listinfomation extends StatelessWidget {
+  const Listinfomation({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: BlocBuilder<ProfileCubit, ProfileState>(
+            builder: (context, state) {
+              if(state.loadStatus==LoadStatus.Loading){
+                 return const Center(child: SpinKitHourGlass(color: Colors.blue,size: 50.0,),);
+              }
+              else if(state.loadStatus == LoadStatus.Error){
+                 return const Center(child: Text('Error'));
+              }
+              else{
+
+              
+              return Column(
+                children: [
+                  const CircleAvatar(
+                    radius: 60,
+                    backgroundImage: AssetImage(
+                        'assets/venom.jpg'), // Replace with your image URL
                   ),
-                ),
-              ],
-            ),
+                  SizedBox(height: 20),
+                  Text(state.account.first.username!, style: TextStyle(fontSize: 18)),
+                  SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context,
+                          '/editProfile'); // Use named route to navigate
+                    },
+                    child: Text('Chỉnh sửa profile'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.red,
+                      disabledForegroundColor: Colors.white.withOpacity(0.38),
+                    ),
+                  ),
+                ],
+              );
+            }},
           ),
-          ListTile(
-            title: Text('Thông tin tài khoản'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Tài khoảng liên kết'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Quản lý thiết bị'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Phim yêu thích'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Download'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () {},
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Ngôn ngữ'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () {
-              showLanguageDialog(context);
-            },
-          ),
-          ButtonDarkLight(),
-        ],
-      ),
+        ),
+        ListTile(
+          title: Text('Thông tin tài khoản'),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {},
+        ),
+        ListTile(
+          title: Text('Tài khoảng liên kết'),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {},
+        ),
+        ListTile(
+          title: Text('Quản lý thiết bị'),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {},
+        ),
+        Divider(),
+        ListTile(
+          title: Text('Phim yêu thích'),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {},
+        ),
+        ListTile(
+          title: Text('Download'),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {},
+        ),
+        Divider(),
+        ListTile(
+          title: Text('Ngôn ngữ'),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {
+            showLanguageDialog(context);
+          },
+        ),
+        ListTile(
+          title: Text('Đăng nhập'),
+          onTap: () {
+            Navigator.pushNamed(context, LoginScreen.route);
+          },
+        ),
+        ButtonDarkLight(),
+      ],
     );
   }
 }
