@@ -6,22 +6,28 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meochill/common/enum/load_status.dart';
 
+import '../../../../models/account.dart';
+
 class LoginState {
   final LoadStatus loadStatus;
+    final Account? loggedInUser;
 
-  LoginState({
+  LoginState( {
     required this.loadStatus,
+     this.loggedInUser,
   });
 
-  LoginState.init({
+  LoginState.init( {
     this.loadStatus = LoadStatus.Init,
+    this.loggedInUser,
   });
 
   LoginState copyWith({
-    LoadStatus? loadStatus,
+    LoadStatus? loadStatus, required Account loggedInUser,
   }) {
     return LoginState(
       loadStatus: loadStatus ?? this.loadStatus,
+      loggedInUser: loggedInUser ?? this.loggedInUser,
     );
   }
 
@@ -47,6 +53,7 @@ class LoginState {
   factory LoginState.fromMap(Map<String, dynamic> map) {
     return LoginState(
       loadStatus: map['loadStatus'] as LoadStatus,
+      loggedInUser: map['loggedInUser'] as Account,
     );
   }
 }

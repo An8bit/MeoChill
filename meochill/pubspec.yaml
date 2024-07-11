@@ -19,6 +19,7 @@ dependencies:
   readmore: ^3.0.0
   webview_flutter: ^4.8.0
   webview_flutter_android: ^3.16.2
+  shared_preferences: ^2.2.3
  
 dev_dependencies:
   flutter_test:

@@ -195,7 +195,7 @@ class FormLogin extends StatelessWidget {
                       width: double.infinity,
                       child: OutlinedButton(
                         onPressed: () {
-                          context.read<LoginCubit>().startLogin();
+                          context.read<LoginCubit>().startLogin(login);
                           context.read<LoginCubit>().checkLogin(login);
                         },
                         style: OutlinedButton.styleFrom(
