@@ -27,6 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("An error occurred"),
         "pageHome": MessageLookupByLibrary.simpleMessage("Home"),
         "title": MessageLookupByLibrary.simpleMessage("Flutter Demo"),
+        "titleHomeList": MessageLookupByLibrary.simpleMessage("Popular Movies"),
+        "titleHomeListbottom":
+            MessageLookupByLibrary.simpleMessage("Recommand Movies"),
         "welcomeMessage":
             MessageLookupByLibrary.simpleMessage("Welcome to MeoChill")
       };

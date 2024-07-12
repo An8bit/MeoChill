@@ -26,6 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorMessage": MessageLookupByLibrary.simpleMessage("Đã Xảy Ra Lỗi"),
         "pageHome": MessageLookupByLibrary.simpleMessage("Trang Chủ"),
         "title": MessageLookupByLibrary.simpleMessage("Ứng dụng Flutter"),
+        "titleHomeList": MessageLookupByLibrary.simpleMessage("Phim Đang Hot"),
+        "titleHomeListbottom":
+            MessageLookupByLibrary.simpleMessage("Phim Đề Xuất"),
         "welcomeMessage": MessageLookupByLibrary.simpleMessage(
             "Chào Mừng Bạn Đến Với MeoChill")
       };

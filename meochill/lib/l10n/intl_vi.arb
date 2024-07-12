@@ -3,7 +3,9 @@
     "welcomeMessage": "Chào Mừng Bạn Đến Với MeoChill",
     "buttonText": "Nhấn Vào Đây",
    "errorMessage": "Đã Xảy Ra Lỗi",
-   "pageHome": "Trang Chủ"
+   "pageHome": "Trang Chủ",
+    "titleHomeList":"Phim Đang Hot",
+    "titleHomeListbottom":"Phim Đề Xuất"
    
 }
     

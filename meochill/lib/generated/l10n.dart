@@ -99,6 +99,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Popular Movies`
+  String get titleHomeList {
+    return Intl.message(
+      'Popular Movies',
+      name: 'titleHomeList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommand Movies`
+  String get titleHomeListbottom {
+    return Intl.message(
+      'Recommand Movies',
+      name: 'titleHomeListbottom',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
