@@ -1,30 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:meochill/models/account.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
-import 'package:meochill/widget/screens/register/cubit/register_cubit.dart';
-import 'package:meochill/widget/screens/register/cubit/register_state.dart';
-
-import '../../../common/enum/load_status.dart';
-import '../../../repostsitories/api.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const String route = "RegisterScreen";
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RegisterCubit(context.read<Api>()),
-      child: page(),
-    );
-  }
-}
-
-class page extends StatelessWidget {
-  const page({
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +33,9 @@ class page extends StatelessWidget {
                       "SignUp",
                       style: TextStyle(color: Colors.white, fontSize: 40),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       "Welcome",
                       style: TextStyle(color: Colors.white, fontSize: 18),
@@ -148,7 +128,7 @@ class FormRegister extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Container(
+                  Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       border: Border(bottom: BorderSide(color: Colors.grey)),
@@ -164,31 +144,43 @@ class FormRegister extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             SizedBox(
               height: 50,
               width: double.infinity,
               child: OutlinedButton(
-                style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.black54)),
-                onPressed: (){},
+                style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colors.black54)),
+                onPressed: () {},
                 child: Text(
                   "Register",
-                  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             SizedBox(
               height: 50,
               width: double.infinity,
               child: OutlinedButton(
-                style: OutlinedButton.styleFrom(side: BorderSide(color: Colors.black54)),
+                style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colors.black54)),
                 onPressed: () {
                   Navigator.of(context).pop(LoginScreen.route);
                 },
                 child: Text(
                   "Back",
-                  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),

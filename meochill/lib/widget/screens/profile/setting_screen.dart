@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
+import 'package:meochill/widget/screens/login/cubit/login_cubit.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_cubit.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_state.dart';
@@ -10,6 +13,7 @@ import '../../../main_cubit.dart';
 
 import 'package:meochill/widget/screens/profile/show_language.dart';
 
+import '../../../models/account.dart';
 import '../../../repostsitories/api.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -17,18 +21,36 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(context.read<Api>())..getListAccountByUserName(
-      "john_doe@edddxample1.com"
+    return  BlocProvider(    
+      create: (context) => ProfileCubit(context.read<Api>())..loadSession(),
+      child: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, state) {
+          if (state.loadStatus == LoadStatus.Loading) {
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else if (state.loadStatus == LoadStatus.Error) {
+            return Scaffold(
+              body: Center(
+                child: Text('Đã xảy ra lỗi khi tải dữ liệu'),
+              ),
+            );
+          } else {
+           // context.read<ProfileCubit>().getListAccountByUserName(state.email);
+            return ProfileScreen();
+          }
+        },
       ),
-      child: ProfileScreen(),
     );
   }
 }
 
 class ButtonDarkLight extends StatefulWidget {
-  const ButtonDarkLight({super.key});
-
+   ButtonDarkLight({super.key});
+ 
+ 
   @override
   State<ButtonDarkLight> createState() => _ButtonDarkLightState();
 }
@@ -36,6 +58,7 @@ class ButtonDarkLight extends StatefulWidget {
 class _ButtonDarkLightState extends State<ButtonDarkLight> {
   @override
   Widget build(BuildContext context) {
+     
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return ListTile(
@@ -57,63 +80,68 @@ class _ButtonDarkLightState extends State<ButtonDarkLight> {
 }
 
 class ProfileScreen extends StatelessWidget {
+ 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       //backgroundColor: Colors.black,
-      body: Listinfomation(),
+      body: Listinfomation( )
+        
     );
   }
 }
 
 class Listinfomation extends StatelessWidget {
-  const Listinfomation({
-    super.key,
-  });
-
+ 
   @override
   Widget build(BuildContext context) {
-    
+   
     return ListView(
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, state) {
-              if(state.loadStatus==LoadStatus.Loading){
-                 return const Center(child: SpinKitHourGlass(color: Colors.blue,size: 50.0,),);
-              }
-              else if(state.loadStatus == LoadStatus.Error){
-                 return const Center(child: Text('Error'));
-              }
-              else{
-
-              
-              return Column(
-                children: [
-                  const CircleAvatar(
-                    radius: 60,
-                    backgroundImage: AssetImage(
-                        'assets/venom.jpg'), // Replace with your image URL
+              if (state.loadStatus == LoadStatus.Loading) {
+                return const Center(
+                  child: SpinKitHourGlass(
+                    color: Colors.blue,
+                    size: 50.0,
                   ),
-                  SizedBox(height: 20),
-                  Text(state.account.first.username!, style: TextStyle(fontSize: 18)),
-                  SizedBox(height: 10),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context,
-                          '/editProfile'); // Use named route to navigate
-                    },
-                    child: Text('Chỉnh sửa profile'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      disabledForegroundColor: Colors.white.withOpacity(0.38),
+                );
+              } else if (state.loadStatus == LoadStatus.Error) {
+                return const Center(child: Text('Error'));
+              } else {
+                   String username = state.account.isNotEmpty 
+                    ? (state.account.first.username ?? "Hiện bạn chưa đăng nhập")
+                    : "Hiện bạn chưa đăng nhập"; 
+                return Column(
+                  children: [
+                    const CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage(
+                          'assets/venom.jpg'), // Replace with your image URL
                     ),
-                  ),
-                ],
-              );
-            }},
+                    SizedBox(height: 20),
+                    Text(username,
+                        style: TextStyle(fontSize: 18)),
+                    SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context,
+                            '/editProfile'); // Use named route to navigate
+                      },
+                      child: Text('Chỉnh sửa profile'),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.red,
+                        disabledForegroundColor: Colors.white.withOpacity(0.38),
+                      ),
+                    ),
+                  ],
+                );
+              }
+            },
           ),
         ),
         ListTile(
@@ -150,10 +178,19 @@ class Listinfomation extends StatelessWidget {
             showLanguageDialog(context);
           },
         ),
-        ListTile(
-          title: Text('Đăng nhập'),
-          onTap: () {
-            Navigator.pushNamed(context, LoginScreen.route);
+        BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (context, state) {
+            return ListTile(
+              title: Text(state.account.isNotEmpty ? 'Đăng xuất' : 'Đăng nhập'),
+              onTap: () {
+                if (state.account.isNotEmpty) {
+                  context.read<ProfileCubit>().logout();
+                   Navigator.pushNamed(context, HomeScreen.route);
+                } else {
+                  Navigator.pushNamed(context, LoginScreen.route);
+                }
+              },
+            );
           },
         ),
         ButtonDarkLight(),

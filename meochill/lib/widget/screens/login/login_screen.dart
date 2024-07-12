@@ -13,6 +13,8 @@ import 'package:meochill/widget/screens/register/register_screen.dart';
 class LoginScreen extends StatelessWidget {
   static const String route = "LoginScreen";
 
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -20,7 +22,7 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Page();
+          return const Page();
         },
       ),
     );
@@ -38,7 +40,7 @@ class Page extends StatelessWidget {
       // Đổ màu cho giao diện lớn
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 30),
+          padding: const EdgeInsets.symmetric(vertical: 30),
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
@@ -48,10 +50,10 @@ class Page extends StatelessWidget {
             ]),
           ),
           // Chia cột dọc để ghi chữ login và welcome
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(
+              SizedBox(
                 height: 80,
               ),
               LoginButton(),
@@ -66,6 +68,8 @@ class Page extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
+  const LoginButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Padding(
@@ -94,6 +98,8 @@ class LoginButton extends StatelessWidget {
 }
 
 class FormLogin extends StatelessWidget {
+  const FormLogin({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -105,7 +111,10 @@ class FormLogin extends StatelessWidget {
             ),
           );
         } else if (state.loadStatus == LoadStatus.Done) {
-          Navigator.of(context).pushNamed(HomeScreen.route);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
         }
       },
       builder: (context, state) {
@@ -128,18 +137,18 @@ class FormLogin extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: EdgeInsets.all(35),
+              padding: const EdgeInsets.all(35),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.only(
                         top: 0), // Đẩy ô input lên cao hơn
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Color.fromRGBO(225, 95, 27, .3),
                           blurRadius: 20,
@@ -150,14 +159,14 @@ class FormLogin extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
                             border: Border(
                               bottom: BorderSide(color: Colors.grey),
                             ),
                           ),
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: "Phone Or Email",
                               hintStyle: TextStyle(color: Colors.grey),
                               border: InputBorder.none,
@@ -166,18 +175,18 @@ class FormLogin extends StatelessWidget {
                                 .read<LoginCubit>()
                                 .state
                                 .account
-                                .username = value,
+                                .email = value,
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
                             border: Border(
                               bottom: BorderSide(color: Colors.grey),
                             ),
                           ),
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: "Password",
                               hintStyle: TextStyle(color: Colors.grey),
                               border: InputBorder.none,
@@ -193,11 +202,11 @@ class FormLogin extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Text(
+                  const Text(
                     "Forgot Password ???",
                     style: TextStyle(color: Colors.grey),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   SizedBox(
                     height: 50,
                     width: double.infinity,
@@ -207,7 +216,7 @@ class FormLogin extends StatelessWidget {
                         context.read<LoginCubit>().checkLogin(state.account);
                       },
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.black54),
+                        side: const BorderSide(color: Colors.black54),
                       ),
                       child: const Text(
                         "Login",
@@ -219,7 +228,7 @@ class FormLogin extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   SizedBox(
                     height: 50,
                     width: double.infinity,
@@ -228,7 +237,7 @@ class FormLogin extends StatelessWidget {
                         Navigator.of(context).pushNamed(RegisterScreen.route);
                       },
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.black54),
+                        side: const BorderSide(color: Colors.black54),
                       ),
                       child: const Text(
                         "Register",
