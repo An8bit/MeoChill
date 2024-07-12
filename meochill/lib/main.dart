@@ -117,7 +117,7 @@ class App extends StatelessWidget {
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: mainRoute,
-          initialRoute: LoginScreen.route,
+          initialRoute: HomeScreen.route,
           home: const Scaffold(
             body: Center(
               child: Text('Hello vv World!'),
