@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meochill/main_cubit.dart';
 import 'package:meochill/repostsitories/MongoService.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -9,6 +10,8 @@ import 'package:meochill/routes.dart';
 import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
+
+import 'generated/l10n.dart';
 
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
@@ -112,7 +115,23 @@ class App extends StatelessWidget {
     return SafeArea(child: BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return MaterialApp(
-          
+          localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: state.locale,
+      supportedLocales: S.delegate.supportedLocales,
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode &&
+              supportedLocale.countryCode == locale?.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,
