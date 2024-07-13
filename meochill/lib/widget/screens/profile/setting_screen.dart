@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,8 +22,15 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(context.read<Api>())..loadSession(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProfileCubit(context.read<Api>())..loadSession(),
+        ),
+        BlocProvider(
+          create: (context) => MainCubit(context.read<Api>()),
+        ),
+      ],
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state.loadStatus == LoadStatus.Loading) {
@@ -184,7 +193,8 @@ class Listinfomation extends StatelessWidget {
                 } else {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
                   );
                 }
               },

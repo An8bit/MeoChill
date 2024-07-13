@@ -103,7 +103,7 @@ class Provider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MainCubit(),
+      create: (context) => MainCubit(context.read<Api>()),
       child: App(),
     );
   }
@@ -115,23 +115,14 @@ class App extends StatelessWidget {
     return SafeArea(child: BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return MaterialApp(
+          locale: state.locale, // Đặt tiếng Việt làm ngôn ngữ mặc định
           localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: state.locale,
-      supportedLocales: S.delegate.supportedLocales,
-      localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale?.languageCode &&
-              supportedLocale.countryCode == locale?.countryCode) {
-            return supportedLocale;
-          }
-        }
-        return supportedLocales.first;
-      },
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,

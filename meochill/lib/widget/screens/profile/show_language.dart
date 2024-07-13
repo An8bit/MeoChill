@@ -1,30 +1,32 @@
 // language_dialog.dart
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meochill/widget/screens/profile/cubit/profile_cubit.dart';
+import 'package:meochill/main_cubit.dart';
 
-import '../../../repostsitories/api.dart';
-import 'cubit/profile_state.dart';
 
 void showLanguageDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return BlocProvider(
-        create: (context) => ProfileCubit(context.read<Api>()),
-        child: BlocBuilder<ProfileCubit, ProfileState>(
-          builder: (context, state) {
             return AlertDialog(
               title: const Text('Chọn ngôn ngữ'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
                     ListTile(
-                        title: Text('Tiếng Anh'),
-                        onTap: () => Navigator.pop(context)),
+                        title: const Text('Tiếng Anh'),
+                        onTap: () {
+                          context.read<MainCubit>().changeLanguage('en', 'US'); // Thay đổi ngôn ngữ sang Tiếng Anh
+                          Navigator.pop(context);
+                        }),
                     ListTile(
-                        title: Text('Tiếng Việt'),
-                        onTap: () => Navigator.pop(context)),
+                        title: const Text('Tiếng Việt'),
+                        onTap: () {
+                          context.read<MainCubit>().changeLanguage('vi', 'VN'); // Thay đổi ngôn ngữ sang Tiếng Việt
+                          Navigator.pop(context);
+                        }),
                   ],
                 ),
               ),
@@ -35,11 +37,8 @@ void showLanguageDialog(BuildContext context) {
                     Navigator.of(context).pop();
                   },
                 ),
-              ],
-            );
-          },
-        ),
-      );
-    },
-  );
+              ],  
+        );
+      },
+    );
 }
