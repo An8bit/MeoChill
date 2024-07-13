@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meochill/main_cubit.dart';
 import 'package:meochill/repostsitories/MongoService.dart';
 import 'package:meochill/repostsitories/api.dart';
@@ -7,6 +8,8 @@ import 'package:meochill/repostsitories/log.dart';
 import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
+
+import 'generated/l10n.dart';
 
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
@@ -100,18 +103,29 @@ class Provider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MainCubit(),
+      create: (context) => MainCubit(context.read<Api>()),
       child: App(),
     );
   }
 }
 
+
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return MaterialApp(
+          locale: state.locale, // Đặt tiếng Việt làm ngôn ngữ mặc định
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,

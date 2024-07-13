@@ -1,0 +1,10 @@
+{
+    "title": "Flutter Demo",
+     "welcomeMessage": "Welcome to MeoChill",
+     "buttonText": "Click Me",
+    "errorMessage": "An error occurred",
+    "pageHome": "Home",
+    "titleHomeList":"Popular Movies",
+    "titleHomeListbottom":"Recommand Movies"
+    
+}
