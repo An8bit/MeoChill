@@ -25,7 +25,7 @@ DefaultTabController Main() {
    
     child: Scaffold(
       appBar: AppBar(
-        title: const Text("MoVies Words"),
+        title: const Text("Movies Words"),
         bottom: const TabBar(
           isScrollable: true,
           tabs: [

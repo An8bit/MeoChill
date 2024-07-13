@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -21,7 +20,7 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(    
+    return BlocProvider(
       create: (context) => ProfileCubit(context.read<Api>())..loadSession(),
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
@@ -38,7 +37,7 @@ class SettingScreen extends StatelessWidget {
               ),
             );
           } else {
-           // context.read<ProfileCubit>().getListAccountByUserName(state.email);
+            // context.read<ProfileCubit>().getListAccountByUserName(state.email);
             return ProfileScreen();
           }
         },
@@ -48,9 +47,8 @@ class SettingScreen extends StatelessWidget {
 }
 
 class ButtonDarkLight extends StatefulWidget {
-   ButtonDarkLight({super.key});
- 
- 
+  ButtonDarkLight({super.key});
+
   @override
   State<ButtonDarkLight> createState() => _ButtonDarkLightState();
 }
@@ -58,11 +56,10 @@ class ButtonDarkLight extends StatefulWidget {
 class _ButtonDarkLightState extends State<ButtonDarkLight> {
   @override
   Widget build(BuildContext context) {
-     
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return ListTile(
-            title: Text('Chế độ tối'),
+            title: Text('Chế độ sáng'),
             enabled: true, // Bạn có thể đặt trực tiếp true nếu không thay đổi
             onTap: () {
               // Nếu bạn muốn xử lý thêm gì đó khi ListTile được tap, thực hiện ở đây
@@ -80,22 +77,17 @@ class _ButtonDarkLightState extends State<ButtonDarkLight> {
 }
 
 class ProfileScreen extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      //backgroundColor: Colors.black,
-      body: Listinfomation( )
-        
-    );
+    return Scaffold(
+        //backgroundColor: Colors.black,
+        body: Listinfomation());
   }
 }
 
 class Listinfomation extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
-   
     return ListView(
       children: [
         Padding(
@@ -112,9 +104,10 @@ class Listinfomation extends StatelessWidget {
               } else if (state.loadStatus == LoadStatus.Error) {
                 return const Center(child: Text('Error'));
               } else {
-                   String username = state.account.isNotEmpty 
-                    ? (state.account.first.username ?? "Hiện bạn chưa đăng nhập")
-                    : "Hiện bạn chưa đăng nhập"; 
+                String username = state.account.isNotEmpty
+                    ? (state.account.first.username ??
+                        "Hiện bạn chưa đăng nhập")
+                    : "Hiện bạn chưa đăng nhập";
                 return Column(
                   children: [
                     const CircleAvatar(
@@ -123,8 +116,7 @@ class Listinfomation extends StatelessWidget {
                           'assets/venom.jpg'), // Replace with your image URL
                     ),
                     SizedBox(height: 20),
-                    Text(username,
-                        style: TextStyle(fontSize: 18)),
+                    Text(username, style: TextStyle(fontSize: 18)),
                     SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
@@ -185,7 +177,10 @@ class Listinfomation extends StatelessWidget {
               onTap: () {
                 if (state.account.isNotEmpty) {
                   context.read<ProfileCubit>().logout();
-                   Navigator.pushNamed(context, HomeScreen.route);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()));
                 } else {
                   Navigator.pushNamed(context, LoginScreen.route);
                 }

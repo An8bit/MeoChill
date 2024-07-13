@@ -167,7 +167,7 @@ class FormLogin extends StatelessWidget {
                           ),
                           child: TextField(
                             decoration: const InputDecoration(
-                              hintText: "Phone Or Email",
+                              hintText: " Email",
                               hintStyle: TextStyle(color: Colors.grey),
                               border: InputBorder.none,
                             ),
@@ -191,6 +191,7 @@ class FormLogin extends StatelessWidget {
                               hintStyle: TextStyle(color: Colors.grey),
                               border: InputBorder.none,
                             ),
+                             obscureText: true,
                             onChanged: (value) => context
                                 .read<LoginCubit>()
                                 .state
@@ -217,6 +218,7 @@ class FormLogin extends StatelessWidget {
                       },
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.black54),
+                        
                       ),
                       child: const Text(
                         "Login",
@@ -224,6 +226,7 @@ class FormLogin extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          
                         ),
                       ),
                     ),

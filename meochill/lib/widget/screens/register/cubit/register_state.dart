@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:meochill/common/enum/load_status.dart';
 
-import 'register_cubit.dart';
+
 class RegisterState {
 final LoadStatus loadStatus;
 final bool confirmpass;
