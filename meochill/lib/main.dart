@@ -112,6 +112,7 @@ class App extends StatelessWidget {
     return SafeArea(child: BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return MaterialApp(
+          
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
           themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,

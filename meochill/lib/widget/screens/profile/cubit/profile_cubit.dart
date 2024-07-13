@@ -43,4 +43,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     await prefs.remove('email');
       emit(state.copyWith(loadStatus: LoadStatus.Error, account: []));
   }
+
+
+
+  Future<void> changeLanguage() async {
+    
+  }
 }
