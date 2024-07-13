@@ -165,10 +165,6 @@ class MongoService implements Api {
   print(accounts.first.email);
   return accounts;
 }
-
-
-  
-
   @override
   Future<bool> registerAccount(Account account) async {
     var collectionaccount = await db.collection(USER_COLLECTION);

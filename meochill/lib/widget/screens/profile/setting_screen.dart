@@ -182,7 +182,10 @@ class Listinfomation extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const HomeScreen()));
                 } else {
-                  Navigator.pushNamed(context, LoginScreen.route);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  );
                 }
               },
             );
