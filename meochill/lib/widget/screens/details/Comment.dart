@@ -4,6 +4,7 @@ class CommentSection extends StatefulWidget {
   const CommentSection({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CommentSectionState createState() => _CommentSectionState();
 }
 
@@ -29,7 +30,7 @@ class _CommentSectionState extends State<CommentSection> {
               itemCount: comments.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: CircleAvatar(
+                  leading:const  CircleAvatar(
                     backgroundImage: AssetImage('assets/venom.jpg'),
                   ),
                   title: Text('User$index'),
@@ -48,14 +49,14 @@ class _CommentSectionState extends State<CommentSection> {
                 controller: _controller,
                 decoration: InputDecoration(
                   hintText: 'Bình luận ở đây...',
-                  prefixIcon: Padding(
+                  prefixIcon: const Padding(
                     padding: EdgeInsets.all(8), // Thêm padding để định dạng CircleAvatar
                     child: CircleAvatar(
                       backgroundImage: AssetImage('assets/venom.jpg'), // Thay thế 'assets/user_avatar.png' với đường dẫn của avatar thực tế
                     ),
                   ),
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: () {
                       if (_controller.text.isNotEmpty) {
                         _addComment(_controller.text);

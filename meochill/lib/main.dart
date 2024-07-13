@@ -6,9 +6,7 @@ import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
 import 'package:meochill/repostsitories/login_impl.dart';
 import 'package:meochill/routes.dart';
-import 'package:meochill/widget/screens/details/details_screen.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
-import 'package:meochill/widget/screens/login/login_screen.dart';
 
 class SimpleBlocObsever extends BlocObserver {
   final LogApp log;
@@ -81,6 +79,8 @@ void main() async {
 }
 
 class Repository extends StatelessWidget {
+  const Repository({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(providers: [

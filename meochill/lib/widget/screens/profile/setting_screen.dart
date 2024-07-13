@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
-import 'package:meochill/widget/screens/login/cubit/login_cubit.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_cubit.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_state.dart';
@@ -12,7 +11,6 @@ import '../../../main_cubit.dart';
 
 import 'package:meochill/widget/screens/profile/show_language.dart';
 
-import '../../../models/account.dart';
 import '../../../repostsitories/api.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -25,13 +23,13 @@ class SettingScreen extends StatelessWidget {
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state.loadStatus == LoadStatus.Loading) {
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           } else if (state.loadStatus == LoadStatus.Error) {
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: Text('Đã xảy ra lỗi khi tải dữ liệu'),
               ),
@@ -47,7 +45,7 @@ class SettingScreen extends StatelessWidget {
 }
 
 class ButtonDarkLight extends StatefulWidget {
-  ButtonDarkLight({super.key});
+  const ButtonDarkLight({super.key});
 
   @override
   State<ButtonDarkLight> createState() => _ButtonDarkLightState();
@@ -137,13 +135,13 @@ class Listinfomation extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Thông tin tài khoản'),
-          trailing: Icon(Icons.chevron_right),
+          title: const Text('Thông tin tài khoản'),
+          trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
         ListTile(
-          title: Text('Tài khoảng liên kết'),
-          trailing: Icon(Icons.chevron_right),
+          title: const Text('Tài khoảng liên kết'),
+          trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
         ListTile(
