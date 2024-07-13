@@ -6,6 +6,10 @@ import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
 
+import '../models/account.dart';
+import '../models/episode.dart';
+import '../widget/screens/favorite/favorite_screen.dart';
+
 //hi bro ở đây là các phương thức  lấy dữ liệu sever nhá nó kế thừa từ class api thêm phương thức gì thì cứ qua bên api lấy rồi fix lại
 //LỚP GÁN CỨNG ĐỂ TEST
 

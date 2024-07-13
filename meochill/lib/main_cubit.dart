@@ -16,10 +16,7 @@ class MainCubit extends Cubit<MainState> {
   void setTheme(bool isLightTheme) {
     emit(state.copyWith(isLightTheme: isLightTheme));
   }
-  Future<void> changeLanguage(String language) async {
-    Locale newLocale = Locale(language);
-    emit(state.copyWith(locale: newLocale));
-  }
+  
 }
 
 
