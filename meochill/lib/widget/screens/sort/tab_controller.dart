@@ -7,6 +7,8 @@ import 'package:meochill/widget/screens/sort/cubit/sort_state.dart';
 import 'package:meochill/widget/screens/sort/widget/main_sort_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../../generated/l10n.dart';
+
 class CustomTabBar extends StatelessWidget {
   const CustomTabBar({Key? key});
 
@@ -14,66 +16,68 @@ class CustomTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SortCubit(context.read<Api>()),
-      child: Main(),
+      child: Main(context),
     );
   }
 }
 
-DefaultTabController Main() {
+DefaultTabController Main(BuildContext context) {
+
+
   return DefaultTabController(
     length: 8,
    
     child: Scaffold(
       appBar: AppBar(
-        title: const Text("Movies Words"),
-        bottom: const TabBar(
+        title:  Text(S.of(context).titleCategoryList),
+        bottom:  TabBar(
           isScrollable: true,
           tabs: [
              Tab(
               child: Text(
-                "Hành Động",
+                S.of(context).titleFlim1,
                
               ),
             ),
              Tab(
               child: Text(
-                "Phiêu Lưu",
+                S.of(context).titleFlim2,
                 
               ),
             ),
              Tab(
               child: Text(
-                "Hài Hước",
+                S.of(context).titleFlim3,
                 
               ),
             ),
              Tab(
               child: Text(
-                "Tinh Cảm",
+                S.of(context).tiltleFlim4,
                 
               ),
             ),
             Tab(
               child: Text(
-                "Tâm Lý",
+                S.of(context).titleFlim5,
                 
               ),
             ),
             Tab(
               child: Text(
-                "Hình Sự",
+               S.of(context).titleFlim6,
                 
               ),
             ),
             Tab(
               child: Text(
-                "Thể Thao",
+                S.of(context).titleFlim7,
                 
               ),
             ),
             Tab(
               child: Text(
-                "Bí Ẩn",
+                S.of(context).titleFlim8,
                 
               ),
             ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/widget/screens/favorite/cubit/favorite_cubit.dart';
 
+import '../../../generated/l10n.dart';
+
 
 class MyFavoriteScreen extends StatelessWidget {
   const MyFavoriteScreen({super.key});
@@ -37,7 +39,7 @@ class MovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Favorite Movies'),
+        title: Text(S.of(context).titleFarvoriteList),
       ),
       body: ListView.builder(
         itemCount: movies.length,

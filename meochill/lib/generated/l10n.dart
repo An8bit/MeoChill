@@ -119,6 +119,206 @@ class S {
       args: [],
     );
   }
+
+  /// `Top Search`
+  String get titleSearchList {
+    return Intl.message(
+      'Top Search',
+      name: 'titleSearchList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Movie World`
+  String get titleCategoryList {
+    return Intl.message(
+      'Movie World',
+      name: 'titleCategoryList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Action`
+  String get titleFlim1 {
+    return Intl.message(
+      'Action',
+      name: 'titleFlim1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adventure`
+  String get titleFlim2 {
+    return Intl.message(
+      'Adventure',
+      name: 'titleFlim2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comedy`
+  String get titleFlim3 {
+    return Intl.message(
+      'Comedy',
+      name: 'titleFlim3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Romantic`
+  String get tiltleFlim4 {
+    return Intl.message(
+      'Romantic',
+      name: 'tiltleFlim4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Psychological`
+  String get titleFlim5 {
+    return Intl.message(
+      'Psychological',
+      name: 'titleFlim5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Criminal`
+  String get titleFlim6 {
+    return Intl.message(
+      'Criminal',
+      name: 'titleFlim6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sport`
+  String get titleFlim7 {
+    return Intl.message(
+      'Sport',
+      name: 'titleFlim7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mystery`
+  String get titleFlim8 {
+    return Intl.message(
+      'Mystery',
+      name: 'titleFlim8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Favorite Movies`
+  String get titleFarvoriteList {
+    return Intl.message(
+      'My Favorite Movies',
+      name: 'titleFarvoriteList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Profile`
+  String get EditProfileButton {
+    return Intl.message(
+      'Edit Profile',
+      name: 'EditProfileButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Information`
+  String get InformationButton {
+    return Intl.message(
+      'Account Information',
+      name: 'InformationButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Affiliate Account`
+  String get AffiliateAccountButton {
+    return Intl.message(
+      'Affiliate Account',
+      name: 'AffiliateAccountButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device Managerment`
+  String get ManagermentButton {
+    return Intl.message(
+      'Device Managerment',
+      name: 'ManagermentButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Favorite Movies`
+  String get MyFarvoriteButton {
+    return Intl.message(
+      'My Favorite Movies',
+      name: 'MyFarvoriteButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get LanguageButton {
+    return Intl.message(
+      'Language',
+      name: 'LanguageButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get LogOutButton {
+    return Intl.message(
+      'Log Out',
+      name: 'LogOutButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In`
+  String get LogInButton {
+    return Intl.message(
+      'Log In',
+      name: 'LogInButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light/Dark Mode`
+  String get RegimeButton {
+    return Intl.message(
+      'Light/Dark Mode',
+      name: 'RegimeButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

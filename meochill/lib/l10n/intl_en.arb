@@ -5,6 +5,25 @@
     "errorMessage": "An error occurred",
     "pageHome": "Home",
     "titleHomeList":"Popular Movies",
-    "titleHomeListbottom":"Recommand Movies"
-    
+    "titleHomeListbottom":"Recommand Movies",
+    "titleSearchList" : "Top Search",
+    "titleCategoryList" : "Movie World",
+    "titleFlim1" : "Action",
+    "titleFlim2" : "Adventure",
+    "titleFlim3" : "Comedy",
+    "tiltleFlim4" : "Romantic",
+    "titleFlim5" : "Psychological",
+    "titleFlim6" : "Criminal",
+    "titleFlim7" : "Sport",
+    "titleFlim8" : "Mystery",
+    "titleFarvoriteList" : "My Favorite Movies",
+    "EditProfileButton" : "Edit Profile",
+    "InformationButton" : "Account Information",
+    "AffiliateAccountButton" : "Affiliate Account",
+    "ManagermentButton" : "Device Managerment",
+    "MyFarvoriteButton" : "My Favorite Movies",
+    "LanguageButton" : "Language",
+    "LogOutButton" : "Log Out",
+    "LogInButton" : "Log In",
+    "RegimeButton" : "Light/Dark Mode"
 }

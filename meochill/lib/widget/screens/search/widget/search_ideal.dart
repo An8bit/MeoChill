@@ -9,13 +9,15 @@ import 'package:meochill/widget/screens/search/cubit/search_state.dart';
 import 'package:meochill/widget/screens/search/widget/search_tiltle.dart';
 import 'package:meochill/widget/screens/search/widget/top_search_item.dart';
 
+import '../../../../generated/l10n.dart';
+
 class SearchIdelWidget extends StatelessWidget {
   const SearchIdelWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const SearchTiltleText(title: "Top Search"),
+      SearchTiltleText(title: S.of(context).titleSearchList),
       kHeight20,
       Expanded(child:
           BlocBuilder<SearchCubit, SearchState>(builder: (context, state) {

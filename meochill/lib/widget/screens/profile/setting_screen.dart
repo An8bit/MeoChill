@@ -7,6 +7,7 @@ import 'package:meochill/widget/screens/login/login_screen.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_cubit.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_state.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../main_cubit.dart';
 
 import 'package:meochill/widget/screens/profile/show_language.dart';
@@ -57,7 +58,7 @@ class _ButtonDarkLightState extends State<ButtonDarkLight> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return ListTile(
-            title: Text('Chế độ sáng'),
+            title: Text(S.of(context).RegimeButton),
             enabled: true, // Bạn có thể đặt trực tiếp true nếu không thay đổi
             onTap: () {
               // Nếu bạn muốn xử lý thêm gì đó khi ListTile được tap, thực hiện ở đây
@@ -121,7 +122,7 @@ class Listinfomation extends StatelessWidget {
                         Navigator.pushNamed(context,
                             '/editProfile'); // Use named route to navigate
                       },
-                      child: Text('Chỉnh sửa profile'),
+                      child: Text(S.of(context).EditProfileButton),
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.red,
@@ -135,23 +136,23 @@ class Listinfomation extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: const Text('Thông tin tài khoản'),
+          title: Text(S.of(context).InformationButton),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
         ListTile(
-          title: const Text('Tài khoảng liên kết'),
+          title: Text(S.of(context).AffiliateAccountButton),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
         ListTile(
-          title: Text('Quản lý thiết bị'),
+          title: Text(S.of(context).ManagermentButton),
           trailing: Icon(Icons.chevron_right),
           onTap: () {},
         ),
         Divider(),
         ListTile(
-          title: Text('Phim yêu thích'),
+          title: Text(S.of(context).MyFarvoriteButton),
           trailing: Icon(Icons.chevron_right),
           onTap: () {},
         ),
@@ -162,7 +163,7 @@ class Listinfomation extends StatelessWidget {
         ),
         Divider(),
         ListTile(
-          title: Text('Ngôn ngữ'),
+          title: Text(S.of(context).LanguageButton),
           trailing: Icon(Icons.chevron_right),
           onTap: () {
             showLanguageDialog(context);
@@ -171,7 +172,7 @@ class Listinfomation extends StatelessWidget {
         BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
             return ListTile(
-              title: Text(state.account.isNotEmpty ? 'Đăng xuất' : 'Đăng nhập'),
+              title: Text(state.account.isNotEmpty ? S.of(context).LogOutButton : S.of(context).LogInButton),
               onTap: () {
                 if (state.account.isNotEmpty) {
                   context.read<ProfileCubit>().logout();

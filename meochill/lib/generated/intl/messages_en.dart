@@ -22,14 +22,41 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AffiliateAccountButton":
+            MessageLookupByLibrary.simpleMessage("Affiliate Account"),
+        "EditProfileButton":
+            MessageLookupByLibrary.simpleMessage("Edit Profile"),
+        "InformationButton":
+            MessageLookupByLibrary.simpleMessage("Account Information"),
+        "LanguageButton": MessageLookupByLibrary.simpleMessage("Language"),
+        "LogInButton": MessageLookupByLibrary.simpleMessage("Log In"),
+        "LogOutButton": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "ManagermentButton":
+            MessageLookupByLibrary.simpleMessage("Device Managerment"),
+        "MyFarvoriteButton":
+            MessageLookupByLibrary.simpleMessage("My Favorite Movies"),
+        "RegimeButton": MessageLookupByLibrary.simpleMessage("Light/Dark Mode"),
         "buttonText": MessageLookupByLibrary.simpleMessage("Click Me"),
         "errorMessage":
             MessageLookupByLibrary.simpleMessage("An error occurred"),
         "pageHome": MessageLookupByLibrary.simpleMessage("Home"),
+        "tiltleFlim4": MessageLookupByLibrary.simpleMessage("Romantic"),
         "title": MessageLookupByLibrary.simpleMessage("Flutter Demo"),
+        "titleCategoryList":
+            MessageLookupByLibrary.simpleMessage("Movie World"),
+        "titleFarvoriteList":
+            MessageLookupByLibrary.simpleMessage("My Favorite Movies"),
+        "titleFlim1": MessageLookupByLibrary.simpleMessage("Action"),
+        "titleFlim2": MessageLookupByLibrary.simpleMessage("Adventure"),
+        "titleFlim3": MessageLookupByLibrary.simpleMessage("Comedy"),
+        "titleFlim5": MessageLookupByLibrary.simpleMessage("Psychological"),
+        "titleFlim6": MessageLookupByLibrary.simpleMessage("Criminal"),
+        "titleFlim7": MessageLookupByLibrary.simpleMessage("Sport"),
+        "titleFlim8": MessageLookupByLibrary.simpleMessage("Mystery"),
         "titleHomeList": MessageLookupByLibrary.simpleMessage("Popular Movies"),
         "titleHomeListbottom":
             MessageLookupByLibrary.simpleMessage("Recommand Movies"),
+        "titleSearchList": MessageLookupByLibrary.simpleMessage("Top Search"),
         "welcomeMessage":
             MessageLookupByLibrary.simpleMessage("Welcome to MeoChill")
       };
