@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:meochill/common/enum/load_status.dart';
+import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/screens/favorite/cubit/favorite_cubit.dart';
 
+import '../../../models/movie.dart';
 
 class MyFavoriteScreen extends StatelessWidget {
   const MyFavoriteScreen({super.key});
@@ -9,42 +13,40 @@ class MyFavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FavoriteCubit(),
+      create: (context) =>
+          FavoriteCubit(context.read<Api>())..showListfavorite(),
       child: MovieList(),
-    
-    );  
+    );
   }
 }
 
-class Movie {
-  final String title;
-  final String imagePath;
 
-  Movie({required this.title, required this.imagePath});
-}
 
 class MovieList extends StatelessWidget {
-  final List<Movie> movies = [
-    Movie(title: 'Venom', imagePath: 'assets/venom.jpg'),
-    Movie(title: 'Spiderman', imagePath: 'assets/spiderman.jpg'),
-    Movie(title: 'Kingsman', imagePath: 'assets/kingsman.jpg'),
-    // Add more movies here
-  ];
-
-
+ 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Favorite Movies'),
-      ),
-      body: ListView.builder(
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          return MovieCard(movie: movies[index]);
-        },
-      ),
+    return BlocBuilder<FavoriteCubit, FavoriteState>(
+      builder: (context, state) {
+        if(state.loadStatus == LoadStatus.Loading){
+          return Center(child: CircularProgressIndicator());
+        }else if(state.loadStatus==LoadStatus.Error){
+          return Center(child: Text("loiiiiiiiiiiii"),);
+        }
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('My Favorite Movies'),
+          ),
+          body: ListView.builder(
+            itemCount: state.movies.length,
+            itemBuilder: (context, index) {
+              return MovieCard(movie: state.movies[index]);
+            },
+          ),
+        );
+      },
     );
   }
 }
@@ -67,8 +69,8 @@ class MovieCard extends StatelessWidget {
             Container(
               width: 100,
               height: 150,
-              child: Image.asset(
-                movie.imagePath,
+              child: Image.network(
+                movie.thumburl!,
                 fit: BoxFit.cover,
               ),
             ),
@@ -78,7 +80,7 @@ class MovieCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    movie.title,
+                    movie.name!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

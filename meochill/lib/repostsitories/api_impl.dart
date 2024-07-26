@@ -2,6 +2,7 @@ import 'package:bson/src/classes/object_id.dart';
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/account.dart';
+import 'package:meochill/models/favorite.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/repostsitories/log.dart';
@@ -131,7 +132,7 @@ class ApiImpl implements Api {
   }
   
   @override
-  Future<List<Account>> getListFavorite(String email) {
+  Future<List<Movie>> getListFavorite(String email) {
     // TODO: implement getListFavorite
     throw UnimplementedError();
   }

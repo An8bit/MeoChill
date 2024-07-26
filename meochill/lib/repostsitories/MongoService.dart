@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:meochill/models/category.dart';
 import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/account.dart';
+import 'package:meochill/models/favorite.dart';
 import 'package:meochill/models/movie.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:mongo_dart/mongo_dart.dart';
@@ -203,9 +204,26 @@ class MongoService implements Api {
   }
   
   @override
-  Future<List<Account>> getListFavorite(String email) async {
-    // TODO: implement getListFavorite
-    //
+  Future<List<Movie>> getListFavorite(String email) async {
+        
+        List<Account> account = await getListAccountByUserName(email);  
+           ObjectId userId =  account.first.id!;
+           String userIdString = userId.oid;
+        
+         var collectionfavorite = await db.collection(FAVORITE_COLLECTION);
+        List<Map<String, dynamic>> list = await collectionfavorite.find(where.eq("user_id", userIdString)).toList();
+         List<Favorite>listfavorite=  list.map((json) => Favorite.fromJson(json)).toList();
+         if(listfavorite.isEmpty){
+          throw Exception("không co danh sach phim");
+         }
+         List<String> listId = listfavorite.first.movieIds;
+           List<ObjectId> movieIds = listId.map((id) => ObjectId.fromHexString(id)).toList();
+           var collectionMovie = db.collection('Movies');
+           List<Map<String,dynamic>>  result = await collectionMovie.find(where.oneFrom('_id', movieIds)).toList();
+            List<Movie> listmovie = result.map((json) => Movie.fromJson(json)).toList();
+            return listmovie;
+             
   }
+  
 
 }

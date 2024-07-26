@@ -19,4 +19,6 @@
   const String COUNTRY_COLLECTION="Countries";
 
   const String USER_COLLECTION="User";
+
+  const String FAVORITE_COLLECTION="Favorite";
   

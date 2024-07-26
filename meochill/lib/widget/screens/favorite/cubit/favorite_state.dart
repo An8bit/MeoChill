@@ -1,25 +1,33 @@
 part of 'favorite_cubit.dart';
 
  class FavoriteState  {
-  final List<Movie> movies;
-  final bool resultsFilm;
   final LoadStatus loadStatus;
+  final List<Movie> movies;
+  final List<String> listIdMovie;
+  
+  FavoriteState({
+    required this.loadStatus,
+    required this.movies,
+    required this.listIdMovie,
+  });
 
-  FavoriteState({required this.movies, required this.resultsFilm, required this.loadStatus});
-
-  FavoriteState copyWith({List<Movie>? movies, bool? resultsFilm, LoadStatus? loadStatus}) {
+  FavoriteState copyWith({
+    LoadStatus? loadStatus,
+    List<Movie>? movies,
+    List<String>? listIdMovie,
+  }) {
     return FavoriteState(
-      movies: movies ?? this.movies,
-      resultsFilm: resultsFilm ?? this.resultsFilm,
       loadStatus: loadStatus ?? this.loadStatus,
+      movies: movies ?? this.movies,
+      listIdMovie: listIdMovie ?? this.listIdMovie,
     );
   }
 
   static FavoriteState init() {
     return FavoriteState(
-      movies: [],
-      resultsFilm: false,
       loadStatus: LoadStatus.Init,
+      movies: [],
+      listIdMovie: [],
     );
   }
 
@@ -28,15 +36,17 @@ part of 'favorite_cubit.dart';
     if (identical(this, other)) return true;
   
     return other is FavoriteState &&
+      other.loadStatus == loadStatus &&
       listEquals(other.movies, movies) &&
-      other.resultsFilm == resultsFilm &&
-      other.loadStatus == loadStatus;
+      listEquals(other.listIdMovie, listIdMovie);
   }
 
   @override
-  int get hashCode => movies.hashCode ^ resultsFilm.hashCode ^ loadStatus.hashCode;
+  int get hashCode => loadStatus.hashCode ^ movies.hashCode ^ listIdMovie.hashCode;
 
   @override
-  String toString() => 'FavoriteState(movies: $movies, resultsFilm: $resultsFilm, loadStatus: $loadStatus)';
+  String toString() => 'FavoriteState(loadStatus: $loadStatus, movies: $movies, listIdMovie: $listIdMovie)';
+
+
 
 }

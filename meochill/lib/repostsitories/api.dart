@@ -1,6 +1,7 @@
 
 import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/account.dart';
+import 'package:meochill/models/favorite.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 import '../models/movie.dart';
@@ -24,5 +25,5 @@ abstract class Api{
   Future<List<String>> getNameCategory(List<String> idcategory);
   Future<List<Episode>> getEpisode(ObjectId id);
   Future<List<Account>> getListAccountByUserName (String email);
-  Future<List<Account>> getListFavorite(String email);
+  Future<List<Movie>> getListFavorite(String email);
 }

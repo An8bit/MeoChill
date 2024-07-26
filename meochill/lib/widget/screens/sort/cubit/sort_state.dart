@@ -67,5 +67,3 @@ final List<Movie> movies;
 
   factory SortState.fromJson(String source) => SortState.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-
-
