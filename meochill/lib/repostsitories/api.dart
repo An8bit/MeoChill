@@ -24,4 +24,5 @@ abstract class Api{
   Future<List<String>> getNameCategory(List<String> idcategory);
   Future<List<Episode>> getEpisode(ObjectId id);
   Future<List<Account>> getListAccountByUserName (String email);
+  Future<List<Account>> getListFavorite(String email);
 }

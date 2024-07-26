@@ -201,5 +201,11 @@ class MongoService implements Api {
       
     }
   }
+  
+  @override
+  Future<List<Account>> getListFavorite(String email) async {
+    // TODO: implement getListFavorite
+    //
+  }
 
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/widget/screens/details/comment.dart';
 import 'package:meochill/widget/screens/details/cubit/details_cubit.dart';
@@ -45,7 +46,6 @@ class Main extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(movie.name!),
-  
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -62,7 +62,7 @@ class Main extends StatelessWidget {
             ),
 
             const Text('Danh sách tập phim',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             EpisodeGrid(), // Thêm widget này vào Column để hiển thị các tập phim
             OtherMovies(otherMovies: actorList),
           ],
@@ -135,15 +135,32 @@ class MovieInfo extends StatelessWidget {
                         .toList()
                   else
                     Text('No categories available'),
-                  // Chip(label: Text('Hành Động')),
-                  // Chip(label: Text('Mạo Hiểm')),
-                  // Chip(label: Text('Fantasy')),
                 ],
               ),
-              Text(""),
-              Text('Length:${movie.time!}'),
-              Text('Language: ${movie.lang!}'),
-              Text('Year: ${movie.year.toString()}'),
+              Row(
+                children: [
+                  Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     
+                      Text(""),
+                      Text('Length:${movie.time!}'),
+                      Text('Language: ${movie.lang!}'),
+                      Text('Year: ${movie.year.toString()}'),
+                    ],
+                  ),
+                  
+                
+                  Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.favorite),color: Colors.pink,iconSize: 30,),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         );
@@ -191,22 +208,32 @@ class EpisodeGrid extends StatelessWidget {
               mainAxisSpacing: 10, // Khoảng cách chính giữa các ô
               crossAxisSpacing: 10, // Khoảng cách phụ giữa các ô
             ),
-            itemCount: state.episodes.first.serverdata?.length ?? 1, // Số lượng tập từ 1 đến 12
+            itemCount: state.episodes.first.serverdata?.length ??
+                1, // Số lượng tập từ 1 đến 12
             itemBuilder: (BuildContext context, int index) {
-              final String link = state.episodes.first.serverdata?[index].link_embed ?? 'Unknown';
-              final String episodenumber = state.episodes.first.serverdata?[index].slug ?? 'Unknown';
-                return GestureDetector(
+              final String link =
+                  state.episodes.first.serverdata?[index].link_embed ??
+                      'Unknown';
+              final String episodenumber =
+                  state.episodes.first.serverdata?[index].slug ?? 'Unknown';
+              return GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => VideoScreen(link:link ,episode: episodenumber)),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            VideoScreen(link: link, episode: episodenumber)),
+                  );
                   // Handle tap event here
-                  print('Tapped on episode ${state.episodes.first.serverdata?[index].link_embed ?? 'Unknown'}');
+                  print(
+                      'Tapped on episode ${state.episodes.first.serverdata?[index].link_embed ?? 'Unknown'}');
                 },
                 child: Card(
                   child: Center(
-                  child: Text('Tập ${episodenumber}'),
+                    child: Text('Tập ${episodenumber}'),
                   ),
                 ),
-                );
+              );
             },
           ),
         );
@@ -231,49 +258,50 @@ class OtherMovies extends StatelessWidget {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           SizedBox(height: 10), // Add some space
           Container(
-      height: 200, // Đặt chiều cao cố định cho danh sách ngang
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: otherMovies.length,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 140, // Đặt chiều rộng cho mỗi container phim
-            child: Card(
-              child: Stack(
-                children: [
-                  // Ảnh nền
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/JackBMT.png/220px-JackBMT.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  // Text hiển thị trên ảnh nền
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      color: Colors.black54,
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        otherMovies[index],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
+            height: 200, // Đặt chiều cao cố định cho danh sách ngang
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: otherMovies.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 140, // Đặt chiều rộng cho mỗi container phim
+                  child: Card(
+                    child: Stack(
+                      children: [
+                        // Ảnh nền
+                        Container(
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/JackBMT.png/220px-JackBMT.png"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                      ),
+                        // Text hiển thị trên ảnh nền
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            color: Colors.black54,
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              otherMovies[index],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                );
+              },
             ),
-          );
-        },
-      ),
-    )
+          )
         ],
       ),
     );
