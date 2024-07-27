@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/account.dart';
@@ -236,7 +236,7 @@ class MongoService implements Api {
       where.eq("email", email),
       modify.set("premium", true),
     );
-    if (result.isSuccess) {
+    if (result["ok"]==0) {
       return true;
     } else {
       return false;
@@ -309,10 +309,14 @@ class MongoService implements Api {
 
   @override
   Future<bool> checkFavorite(String email, String id) async {
-    List<Movie> listFavorite = await getListFavorite(email);
+   List<Movie> listFavorite = await getListFavorite(email);
 
-    if (listFavorite.any((movie) => movie.id?.oid == id)) {
-      return true;
+    if (listFavorite != null && listFavorite.isNotEmpty) {
+      if (listFavorite.any((movie) => movie.id?.oid == id)) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
@@ -327,5 +331,18 @@ class MongoService implements Api {
     } else {
       return false;
     }
+  }
+  
+  @override
+  Future<bool> checkFilmPremium(ObjectId id) async {
+    var collectionMovie = await db.collection(MOVIES_COLLECTION);
+    var result = await collectionMovie.findOne(where.id(id));
+    if(result["sub_docquyen"]==true){
+      return true;
+    }
+    else{
+      return false;
+    }
+    
   }
 }

@@ -173,5 +173,11 @@ class ApiImpl implements Api {
     throw UnimplementedError();
   }
   
+  @override
+  Future<bool> checkFilmPremium(ObjectId id) {
+    // TODO: implement checkFilmPremium
+    throw UnimplementedError();
+  }
+  
  
 }

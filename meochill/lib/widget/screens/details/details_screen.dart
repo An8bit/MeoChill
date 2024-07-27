@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:meochill/generated/l10n.dart';
-import 'package:meochill/models/favorite.dart';
+
 import 'package:meochill/widget/screens/details/comment.dart';
 import 'package:meochill/widget/screens/details/round_text_widget.dart';
 import 'package:meochill/widget/screens/details/video_screen.dart';
 import 'package:meochill/widget/screens/favorite/cubit/favorite_cubit.dart';
-import 'package:meochill/widget/screens/sort/tab_controller.dart';
+import 'package:meochill/widget/screens/premium/cubit/premium_cubit.dart';
+import 'package:meochill/widget/screens/premium/cubit/premium_state.dart';
 
 import '../../../common/enum/load_status.dart';
 import '../../../models/movie.dart';
 import '../../../repostsitories/api.dart';
+import '../premium/premium_screen.dart';
+
 import 'cubit/details_cubit.dart';
 
 class MovieDetailScreen extends StatelessWidget {
@@ -39,6 +41,10 @@ class MovieDetailScreen extends StatelessWidget {
           create: (context) =>
               FavoriteCubit(context.read<Api>())..checkFavorite(movie.id!),
         ),
+        BlocProvider(
+          create: (context) =>
+              PremiumCubit(context.read<Api>())..checkFilmPremium(movie.id!),
+        )
       ],
       child: Main(
         movie: movie,
@@ -80,7 +86,28 @@ class Main extends StatelessWidget {
 
             const Text('Danh sách tập phim',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            EpisodeGrid(), // Thêm widget này vào Column để hiển thị các tập phim
+            BlocBuilder<PremiumCubit, PremiumState>(
+              builder: (context, state) {
+                if (!state.isPremium && state.isMoviePremium) {
+                  Future.microtask(() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PremiumScreen(),
+                      ),
+                    );
+                  });
+                  return SizedBox.shrink(); // Trả về một widget trống tạm thời
+                }else if(state.isguestLecture && state.isMoviePremium){
+
+                  
+                }else if(state.loadStatus==LoadStatus.Error){
+                  return const Center(child:Text("Lỗi tải dữ liệu"));
+
+                }
+                return EpisodeGrid();
+              },
+            ), // Thêm widget này vào Column để hiển thị các tập phim
             OtherMovies(otherMovies: actorList),
           ],
         ),
@@ -336,7 +363,7 @@ class OtherMovies extends StatelessWidget {
                           decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/JackBMT.png/220px-JackBMT.png"),
+                                  "https://media.istockphoto.com/id/515930993/vi/vec-to/h%C3%ACnh-b%C3%B3ng-%C4%91%E1%BA%A7u-v%C3%A0-vai-c%E1%BB%A7a-ng%C6%B0%E1%BB%9Di-%C4%91%C3%A0n-%C3%B4ng-v%E1%BB%9Bi-vect%C6%A1-d%E1%BA%A5u-hi%E1%BB%87u-excalmation.jpg?s=612x612&w=0&k=20&c=-QnM1-GdYjouRaEUNz92Mdw6ubvS_9Ra12_YB8nF5eI="),
                               fit: BoxFit.cover,
                             ),
                           ),

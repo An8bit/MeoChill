@@ -32,4 +32,5 @@ abstract class Api{
   Future<bool> deleteFavorite(String email,String id);
   Future<bool> checkFavorite(String email,String id);
   Future<bool> checkPremium(String email);
+  Future<bool> checkFilmPremium(ObjectId id);
 }

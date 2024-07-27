@@ -1,38 +1,51 @@
-
-
 import '../../../../common/enum/load_status.dart';
 
 class  PremiumState {
 final bool isPremium;
 final LoadStatus loadStatus;
+final bool isMoviePremium;
+final bool isguestLecture;
 
-PremiumState({this.isPremium = false, this.loadStatus = LoadStatus.Loading});
+PremiumState(this.isguestLecture, {
+  required this.isPremium,
+  required this.loadStatus,
+  required this.isMoviePremium,
+});
 
-PremiumState.Init() : this(isPremium: false, loadStatus: LoadStatus.Loading);
+PremiumState.init({
+  this.isPremium = false,
+  this.loadStatus = LoadStatus.Init,
+  this.isMoviePremium = false,
+  this.isguestLecture = false,
+});
 
-PremiumState copyWith({bool? isPremium, LoadStatus? loadStatus}) {
+PremiumState copyWith({
+  bool? isPremium,
+  LoadStatus? loadStatus,
+  bool? isMoviePremium,
+  bool? isguestLecture,
+}) {
   return PremiumState(
+    isguestLecture ?? this.isguestLecture,
     isPremium: isPremium ?? this.isPremium,
     loadStatus: loadStatus ?? this.loadStatus,
-  );}
- 
- @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is PremiumState &&
-      other.isPremium == isPremium &&
-      other.loadStatus == loadStatus;
-  }
-
-  @override
-  int get hashCode => isPremium.hashCode ^ loadStatus.hashCode;
-
-  @override
-  String toString() => 'PremiumState(isPremium: $isPremium, loadStatus: $loadStatus)';  
-
-
-  
+    isMoviePremium: isMoviePremium ?? this.isMoviePremium,
+  );
 }
 
 
+
+@override
+bool operator ==(covariant PremiumState other) {
+  if (identical(this, other)) return true;
+
+  return other.isPremium == isPremium &&
+      other.loadStatus == loadStatus &&
+      other.isMoviePremium == isMoviePremium &&
+      other.isguestLecture == isguestLecture;
+
+}
+@override
+int get hashCode =>
+  isPremium.hashCode ^ loadStatus.hashCode ^ isMoviePremium.hashCode ^ isguestLecture.hashCode;
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/repostsitories/api.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/premium/cubit/premium_cubit.dart';
 import 'package:meochill/widget/screens/premium/cubit/premium_state.dart';
 
@@ -28,7 +30,41 @@ class BuyDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PremiumCubit, PremiumState>(
+    return BlocConsumer<PremiumCubit, PremiumState>(
+      listener: (context, state) {
+        if (state.loadStatus == LoadStatus.Done && state.isPremium) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Đăng ký thành công"),
+              backgroundColor: Colors.green,
+            ),
+          );
+           Future.microtask(() {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        );
+      });}
+       else if(state.isPremium){
+         ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Tài khoản đã được đăng ký"),
+              backgroundColor: Colors.yellow,
+            ),
+          );
+       }
+        
+        else{
+           ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Lỗi"),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -38,12 +74,12 @@ class BuyDetail extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                 ListTile(
+                ListTile(
                   title: const Text('MellChill Premium',
                       style: TextStyle(color: Colors.white)),
-                  subtitle:
-                      const Text('MellChill', style: TextStyle(color: Colors.grey)),
-                  leading: Image.asset("assets/images.png"), 
+                  subtitle: const Text('MellChill',
+                      style: TextStyle(color: Colors.grey)),
+                  leading: Image.asset("assets/images.png"),
                 ),
                 Container(
                   padding: EdgeInsets.all(16),
@@ -148,14 +184,12 @@ class BuyDetail extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                   onPressed: () {
-                    context.read<PremiumCubit>().buyPremium();
-                    // Show SnackBar upon success
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Subscription check successful!"),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
+
+                  
+                     context.read<PremiumCubit>().buyPremium();
+               
+                    
+                    
                   },
                   child: const Text('Đăng ký',
                       style: TextStyle(color: Colors.white)),
