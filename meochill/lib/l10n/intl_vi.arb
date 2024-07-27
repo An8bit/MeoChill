@@ -5,7 +5,26 @@
    "errorMessage": "Đã Xảy Ra Lỗi",
    "pageHome": "Trang Chủ",
     "titleHomeList":"Phim Đang Hot",
-    "titleHomeListbottom":"Phim Đề Xuất"
-   
+    "titleHomeListbottom":"Phim Đề Xuất",
+    "titleSearchList" : "Tìm kiếm nhiều nhất",
+    "titleCategoryList" : "Thế Giới Phim",
+    "titleFlim1" : "Hành động",
+    "titleFlim2" : "Phiêu lưu",
+    "titleFlim3" : "Hài hước",
+    "tiltleFlim4" : "Tình cảm",
+    "titleFlim5" : "Tâm lý",
+    "titleFlim6" : "Hình sự",
+    "titleFlim7" : "Thể thao",
+    "titleFlim8" : "Bí ẩn",
+   "titleFarvoriteList" : "Phim Yêu Thích",
+    "EditProfileButton" : "Chỉnh sửa thông tin",
+    "InformationButton" : "Thông tin tài khoản",
+    "AffiliateAccountButton" : "Tài khoản liên kết",
+    "ManagermentButton" : "Quản lý thiết bị",
+    "MyFarvoriteButton" : "Phim Yêu Thích",
+    "LanguageButton" : "Ngôn Ngữ",
+    "LogOutButton" : "Đăng Xuất",
+    "LogInButton" : "Đăng Nhập",
+    "RegimeButton" : "Chế Độ sáng tối"
 }
     

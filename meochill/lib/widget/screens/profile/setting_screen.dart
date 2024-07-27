@@ -12,6 +12,7 @@ import '../../../main_cubit.dart';
 import 'package:meochill/widget/screens/profile/show_language.dart';
 
 import '../../../repostsitories/api.dart';
+import '../premium/premium_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -135,30 +136,18 @@ class Listinfomation extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: const Text('Thông tin tài khoản'),
+          title: const Text('Thông báo'),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () {},
-        ),
-        ListTile(
-          title: const Text('Tài khoảng liên kết'),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () {},
-        ),
-        ListTile(
-          title: Text('Quản lý thiết bị'),
-          trailing: Icon(Icons.chevron_right),
           onTap: () {},
         ),
         Divider(),
         ListTile(
-          title: Text('Phim yêu thích'),
+          title: Text('Nâng cấp gói tài khoản'),
           trailing: Icon(Icons.chevron_right),
-          onTap: () {},
-        ),
-        ListTile(
-          title: Text('Download'),
-          trailing: Icon(Icons.chevron_right),
-          onTap: () {},
+          onTap: () {
+
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>  PremiumScreen()));
+          },
         ),
         Divider(),
         ListTile(

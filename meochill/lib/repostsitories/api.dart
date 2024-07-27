@@ -26,4 +26,9 @@ abstract class Api{
   Future<List<Episode>> getEpisode(ObjectId id);
   Future<List<Account>> getListAccountByUserName (String email);
   Future<List<Movie>> getListFavorite(String email);
+  Future<bool> buyPremium(String email);
+  Future<List<Movie>> getPremiumMovie();
+  Future<bool> addFavorite(String email,String id);
+  Future<bool> deleteFavorite(String email,String id);
+  Future<bool> checkFavorite(String email,String id);
 }

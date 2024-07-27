@@ -10,9 +10,12 @@ class ListHomeMovies extends StatelessWidget {
     super.key,
     required this.listtoptrending,
     required this.listrecommand,
+    required this.listpremium,
+    
   });
   final List<Movie> listtoptrending;
   final List<Movie> listrecommand;
+  final List<Movie> listpremium;
   
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,11 @@ class ListHomeMovies extends StatelessWidget {
             SizedBox(
               height: 250,
               child: MainItem(nowShowingMovies: listrecommand),
+            ),
+            const TitleBody(title: "PREMIUM"),
+            SizedBox(
+              height: 250,
+              child: MainItem(nowShowingMovies: listpremium),
             ),
           ],
              ),

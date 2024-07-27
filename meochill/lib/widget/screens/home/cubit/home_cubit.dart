@@ -1,14 +1,13 @@
-import 'dart:convert';
+
 
 import 'package:bloc/bloc.dart';
 
 import 'package:meochill/common/enum/load_status.dart';
-import 'package:mongo_dart/mongo_dart.dart';
+import 'package:meochill/widget/screens/home/cubit/home_state.dart';
 
-import '../../../../models/movie.dart';
 import '../../../../repostsitories/api.dart';
 
-part 'home_state.dart';
+
 
 class HomeCubit extends Cubit<HomeState> {
   final Api api;
@@ -22,10 +21,11 @@ class HomeCubit extends Cubit<HomeState> {
       if(state.moviestoptrend.isEmpty){
           final moviestoptrend = await api.getTopTrending();
           final moviesrecommand = await api.getRecommandMovie();
+          final moviegetpremium = await api.getPremiumMovie();
           emit(state.copyWith(
           moviestoptrend: moviestoptrend,
           loadStatus: LoadStatus.Done,
-          moviesrecommand: moviesrecommand));
+          moviesrecommand: moviesrecommand,moviegetpremium: moviegetpremium,));
       }
       else{
         emit(state.copyWith(loadStatus: LoadStatus.Error));

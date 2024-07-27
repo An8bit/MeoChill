@@ -1,6 +1,5 @@
-import 'dart:convert';
+import 'dart:math';
 
-import 'package:meochill/models/category.dart';
 import 'package:meochill/models/episode.dart';
 import 'package:meochill/models/account.dart';
 import 'package:meochill/models/favorite.dart';
@@ -156,16 +155,19 @@ class MongoService implements Api {
         await collectionEpisode.find(where.eq("movie_id", id)).toList();
     List<Episode> episode = list.map((json) => Episode.fromJson(json)).toList();
     return episode;
-}
+  }
 
   @override
   Future<List<Account>> getListAccountByUserName(String email) async {
-  var collectionAccount = await db.collection(USER_COLLECTION);
-  List<Map<String, dynamic>> list = await collectionAccount.find(where.eq("email", email)).toList();
-  List<Account> accounts = list.map((json) => Account.fromJson(json)).toList();
-  print(accounts.first.email);
-  return accounts;
-}
+    var collectionAccount = await db.collection(USER_COLLECTION);
+    List<Map<String, dynamic>> list =
+        await collectionAccount.find(where.eq("email", email)).toList();
+    List<Account> accounts =
+        list.map((json) => Account.fromJson(json)).toList();
+    print(accounts.first.email);
+    return accounts;
+  }
+
   @override
   Future<bool> registerAccount(Account account) async {
     var collectionaccount = await db.collection(USER_COLLECTION);
@@ -199,31 +201,121 @@ class MongoService implements Api {
       return false;
     } else {
       return true;
-      
+    }
+  }
+
+  @override
+  Future<List<Movie>> getListFavorite(String email) async {
+    List<Account> account = await getListAccountByUserName(email);
+    ObjectId userId = account.first.id!;
+    String userIdString = userId.oid;
+
+    var collectionfavorite = await db.collection(FAVORITE_COLLECTION);
+    List<Map<String, dynamic>> list = await collectionfavorite
+        .find(where.eq("user_id", userIdString))
+        .toList();
+    List<Favorite> listfavorite =
+        list.map((json) => Favorite.fromJson(json)).toList();
+    if (listfavorite.isEmpty) {
+      throw Exception("không co danh sach phim");
+    }
+    List<String> listId = listfavorite.first.movieIds;
+    List<ObjectId> movieIds =
+        listId.map((id) => ObjectId.fromHexString(id)).toList();
+    var collectionMovie = db.collection('Movies');
+    List<Map<String, dynamic>> result =
+        await collectionMovie.find(where.oneFrom('_id', movieIds)).toList();
+    List<Movie> listmovie = result.map((json) => Movie.fromJson(json)).toList();
+    return listmovie;
+  }
+
+  @override
+  Future<bool> buyPremium(String email) async {
+    var collectionAccount = db.collection(USER_COLLECTION);
+    var result = await collectionAccount.update(
+      where.eq("email", email),
+      modify.set("premium", true),
+    );
+    if (result.isSuccess) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<List<Movie>> getPremiumMovie() async {
+    var collectionMovies = await db.collection(MOVIES_COLLECTION);
+    List<Map<String, dynamic>> listmovies = [];
+    listmovies =
+        await collectionMovies.find(where.eq('sub_docquyen', true)).toList();
+    return listmovies.map((json) => Movie.fromJson(json)).toList();
+  }
+
+  @override
+  Future<bool> addFavorite(String email, String id) async {
+    var collectionAccount = db.collection(USER_COLLECTION);
+    var collectionFavorite = db.collection(FAVORITE_COLLECTION);
+    List<Account> account = await getListAccountByUserName(email);
+    ObjectId userId = account.first.id!;
+    String userIdString = userId.oid;
+    var result =
+        await collectionFavorite.findOne(where.eq("user_id", userIdString));
+    if (result == null) {
+      var favorite = await collectionFavorite.insertOne(<String, dynamic>{
+        "user_id": userIdString,
+        "movieIds": [id],
+      });
+      if (favorite.isSuccess) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      List<dynamic> movieIds = result["movieIds"];
+      movieIds.add(id);
+      var update = await collectionFavorite.update(
+          where.eq("user_id", userIdString), modify.set("movieIds", movieIds));
+      if (update["ok"] == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  @override
+  Future<bool> deleteFavorite(String email, String id) async {
+    var collectionFavorite = db.collection(FAVORITE_COLLECTION);
+    List<Account> account = await getListAccountByUserName(email);
+    ObjectId userId = account.first.id!;
+    String userIdString = userId.oid;
+    var result =
+        await collectionFavorite.findOne(where.eq("user_id", userIdString));
+    if (result != null) {
+      List<dynamic> movieIds = result["movieIds"];
+      movieIds.remove(id);
+      var delete = await collectionFavorite.update(
+          where.eq("user_id", userIdString), modify.set("movieIds", movieIds));
+      if (delete["ok"] == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }else{
+      return false;
     }
   }
   
   @override
-  Future<List<Movie>> getListFavorite(String email) async {
-        
-        List<Account> account = await getListAccountByUserName(email);  
-           ObjectId userId =  account.first.id!;
-           String userIdString = userId.oid;
-        
-         var collectionfavorite = await db.collection(FAVORITE_COLLECTION);
-        List<Map<String, dynamic>> list = await collectionfavorite.find(where.eq("user_id", userIdString)).toList();
-         List<Favorite>listfavorite=  list.map((json) => Favorite.fromJson(json)).toList();
-         if(listfavorite.isEmpty){
-          throw Exception("không co danh sach phim");
-         }
-         List<String> listId = listfavorite.first.movieIds;
-           List<ObjectId> movieIds = listId.map((id) => ObjectId.fromHexString(id)).toList();
-           var collectionMovie = db.collection('Movies');
-           List<Map<String,dynamic>>  result = await collectionMovie.find(where.oneFrom('_id', movieIds)).toList();
-            List<Movie> listmovie = result.map((json) => Movie.fromJson(json)).toList();
-            return listmovie;
-             
+  Future<bool> checkFavorite(String email, String id) async {
+   List<Movie> listFavorite = await getListFavorite(email);
+   
+    if(listFavorite.any((movie) => movie.id?.oid ==id)){
+      return true;
+}
+else{
+  return false;
+}
   }
-  
-
 }

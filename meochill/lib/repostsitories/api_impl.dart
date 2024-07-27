@@ -137,5 +137,35 @@ class ApiImpl implements Api {
     throw UnimplementedError();
   }
   
+  @override
+  Future<bool> buyPremium(String email) {
+    // TODO: implement buyPremium
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<Movie>> getPremiumMovie() {
+    // TODO: implement getPremiumMovie
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<bool> addFavorite(String email, String id) {
+    // TODO: implement addFavorite
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<bool> deleteFavorite(String email, String id) {
+    // TODO: implement deleteFavorite
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<bool> checkFavorite(String mail , String id) {
+    // TODO: implement checkFavorite
+    throw UnimplementedError();
+  }
+  
  
 }

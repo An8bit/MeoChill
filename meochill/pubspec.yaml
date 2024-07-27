@@ -24,6 +24,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl_utils: ^2.8.7
+  flutter_widget_from_html: ^0.15.1
  
 dev_dependencies:
   flutter_test:

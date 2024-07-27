@@ -7,6 +7,7 @@ import 'package:meochill/common/enum/load_status.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:meochill/repostsitories/api.dart';
 import 'package:meochill/widget/screens/home/cubit/home_cubit.dart';
+import 'package:meochill/widget/screens/home/cubit/home_state.dart';
 import 'package:meochill/widget/screens/home/widget/list_home_movie.dart';
 import '../../../generated/l10n.dart';
 import '../search/search_screen.dart';
@@ -93,7 +94,7 @@ ListTopMovie(context) {
                   state.moviestoptrend.isNotEmpty) {
                 return ListHomeMovies(
                   listtoptrending: state.moviestoptrend,
-                  listrecommand: state.moviesrecommand,
+                  listrecommand: state.moviesrecommand, listpremium: state.moviegetpremium,
                 );
               } else if (state.loadStatus == LoadStatus.Loading) {
                 return const Center(

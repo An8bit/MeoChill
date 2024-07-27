@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:meochill/generated/l10n.dart';
+import 'package:meochill/models/favorite.dart';
 import 'package:meochill/widget/screens/details/comment.dart';
-import 'package:meochill/widget/screens/details/cubit/details_cubit.dart';
+import 'package:meochill/widget/screens/details/round_text_widget.dart';
 import 'package:meochill/widget/screens/details/video_screen.dart';
-import 'package:readmore/readmore.dart';
+import 'package:meochill/widget/screens/favorite/cubit/favorite_cubit.dart';
+import 'package:meochill/widget/screens/sort/tab_controller.dart';
 
 import '../../../common/enum/load_status.dart';
 import '../../../models/movie.dart';
 import '../../../repostsitories/api.dart';
+import 'cubit/details_cubit.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   MovieDetailScreen({super.key, required this.movie});
@@ -24,10 +29,22 @@ class MovieDetailScreen extends StatelessWidget {
     final List<String> actorList =
         movie.actor?.where((actor) => actor != null).cast<String>().toList() ??
             [];
-    return BlocProvider(
-        create: (context) =>
-            DetailsCubit(context.read<Api>())..getNameCategory(movie),
-        child: Main(movie: movie, actorList: actorList));
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              DetailsCubit(context.read<Api>())..getNameCategory(movie),
+        ),
+        BlocProvider(
+          create: (context) =>
+              FavoriteCubit(context.read<Api>())..checkFavorite(movie.id!),
+        ),
+      ],
+      child: Main(
+        movie: movie,
+        actorList: actorList,
+      ),
+    );
   }
 }
 
@@ -140,23 +157,66 @@ class MovieInfo extends StatelessWidget {
               Row(
                 children: [
                   Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     
-                      Text(""),
-                      Text('Length:${movie.time!}'),
-                      Text('Language: ${movie.lang!}'),
-                      Text('Year: ${movie.year.toString()}'),
+                      RoundText(
+                        text: 'Length:${movie.time!}',
+                      ),
+                      RoundText(text: 'Language: ${movie.lang!}'),
+                      RoundText(text: 'Year: ${movie.year.toString()}'),
                     ],
                   ),
-                  
-                
+                  const Spacer(),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add_circle_outline_sharp,
+                        size: 30,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.telegram_rounded,
+                        size: 30,
+                      )),
                   Padding(
                     padding: const EdgeInsets.all(0),
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.favorite),color: Colors.pink,iconSize: 30,),
+                      child: BlocBuilder<FavoriteCubit, FavoriteState>(
+                        builder: (context, state) {
+                          return IconButton(
+                            onPressed: state.isFavorite ||
+                                    state.loadStatus == LoadStatus.Loading
+                                ? null // Nếu phim đã được yêu thích hoặc đang tải, không cho phép ấn
+                                : () {
+                                    context
+                                        .read<FavoriteCubit>()
+                                        .addFavorite(movie.id!);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Added to Favorites!"),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  },
+                            icon: state.loadStatus == LoadStatus.Loading
+                                ? const SpinKitDualRing(
+                                    size: 30,
+                                    color: Colors.grey,
+                                  )
+                                : Icon(
+                                    state.isFavorite
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    size: 30,
+                                    color: state.isFavorite
+                                        ? Colors.red
+                                        : Colors.black,
+                                  ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -178,15 +238,18 @@ class MovieDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: ReadMoreText(
+      child: HtmlWidget(
         description,
-        trimMode: TrimMode.Line,
-        trimLines: 2,
-        colorClickableText: Colors.pink,
-        trimCollapsedText: 'Hiện thêm',
-        trimExpandedText: 'Rút gọn',
-        moreStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
+      // ReadMoreText(
+      //   description,
+      //   trimMode: TrimMode.Line,
+      //   trimLines: 2,
+      //   colorClickableText: Colors.pink,
+      //   trimCollapsedText: 'Hiện thêm',
+      //   trimExpandedText: 'Rút gọn',
+      //   moreStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      // ),
     );
   }
 }
@@ -202,7 +265,7 @@ class EpisodeGrid extends StatelessWidget {
         return Container(
           height: 170, // Thiết lập chiều cao cho GridView
           child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4, // Số cột
               childAspectRatio: 2.0, // Tỷ lệ khung hình của mỗi ô
               mainAxisSpacing: 10, // Khoảng cách chính giữa các ô
@@ -256,7 +319,7 @@ class OtherMovies extends StatelessWidget {
         children: [
           const Text('Cast',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          SizedBox(height: 10), // Add some space
+          const SizedBox(height: 10), // Add some space
           Container(
             height: 200, // Đặt chiều cao cố định cho danh sách ngang
             child: ListView.builder(
@@ -289,7 +352,7 @@ class OtherMovies extends StatelessWidget {
                             child: Text(
                               otherMovies[index],
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
