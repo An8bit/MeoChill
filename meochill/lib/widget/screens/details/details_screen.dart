@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:meochill/widget/navigator/navigartor.dart';
 
 import 'package:meochill/widget/screens/details/comment.dart';
 import 'package:meochill/widget/screens/details/round_text_widget.dart';
@@ -99,8 +100,8 @@ class Main extends StatelessWidget {
                   });
                   return SizedBox.shrink(); // Trả về một widget trống tạm thời
                 }else if(state.isguestLecture && state.isMoviePremium){
-
-                  
+                    
+                 return const Center(child:Text("Mua vip đê"));
                 }else if(state.loadStatus==LoadStatus.Error){
                   return const Center(child:Text("Lỗi tải dữ liệu"));
 
