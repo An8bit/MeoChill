@@ -167,5 +167,11 @@ class ApiImpl implements Api {
     throw UnimplementedError();
   }
   
+  @override
+  Future<bool> checkPremium(String email) {
+    // TODO: implement checkPremium
+    throw UnimplementedError();
+  }
+  
  
 }

@@ -12,7 +12,7 @@ class PremiumCubit extends Cubit<PremiumState> {
   final Api api;
   PremiumCubit(this.api) : super(PremiumState.Init());
 
-  void checkPremium() async {
+  void buyPremium() async {
     try {
       final prefs = await SharedPreferences.getInstance();
     final  userJson = prefs.getString('email');
@@ -30,4 +30,21 @@ class PremiumCubit extends Cubit<PremiumState> {
   void setPremium(bool isPremium) {
     emit(state.copyWith(isPremium: isPremium));
   }
+
+ Future<void> checkPremium() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+    final  userJson = prefs.getString('email');
+    if (userJson != null) {
+      final isPremium = await api.checkPremium(userJson);
+      emit(state.copyWith(isPremium: isPremium, loadStatus: LoadStatus.Done));}
+      else {
+        emit(state.copyWith(loadStatus: LoadStatus.Error));
+      }
+    } catch (e) {
+      print("lỗi tại checkPremium: $e");
+      emit(state.copyWith(loadStatus: LoadStatus.Error));
+    }
+  }
+
 }

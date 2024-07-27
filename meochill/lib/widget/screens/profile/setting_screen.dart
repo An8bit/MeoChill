@@ -4,6 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meochill/common/enum/load_status.dart';
 import 'package:meochill/widget/navigator/navigartor.dart';
 import 'package:meochill/widget/screens/login/login_screen.dart';
+import 'package:meochill/widget/screens/premium/cubit/premium_cubit.dart';
+import 'package:meochill/widget/screens/premium/cubit/premium_state.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_cubit.dart';
 import 'package:meochill/widget/screens/profile/cubit/profile_state.dart';
 
@@ -19,8 +21,16 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(context.read<Api>())..loadSession(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProfileCubit(context.read<Api>())..loadSession(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              PremiumCubit(context.read<Api>())..checkPremium(),
+        ),
+      ],
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state.loadStatus == LoadStatus.Loading) {
@@ -107,30 +117,7 @@ class Listinfomation extends StatelessWidget {
                     ? (state.account.first.username ??
                         "Hiện bạn chưa đăng nhập")
                     : "Hiện bạn chưa đăng nhập";
-                return Column(
-                  children: [
-                    const CircleAvatar(
-                      radius: 60,
-                      backgroundImage: AssetImage(
-                          'assets/venom.jpg'), // Replace with your image URL
-                    ),
-                    SizedBox(height: 20),
-                    Text(username, style: TextStyle(fontSize: 18)),
-                    SizedBox(height: 10),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context,
-                            '/editProfile'); // Use named route to navigate
-                      },
-                      child: Text('Chỉnh sửa profile'),
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.red,
-                        disabledForegroundColor: Colors.white.withOpacity(0.38),
-                      ),
-                    ),
-                  ],
-                );
+                return Premium(username);
               }
             },
           ),
@@ -140,13 +127,20 @@ class Listinfomation extends StatelessWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
+        ListTile(
+          title: const Text('Chỉnh sửa thông tin tài khoản'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () {
+            Navigator.pushNamed(context, '/editProfile');
+          },
+        ),
         Divider(),
         ListTile(
           title: Text('Nâng cấp gói tài khoản'),
           trailing: Icon(Icons.chevron_right),
           onTap: () {
-
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>  PremiumScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PremiumScreen()));
           },
         ),
         Divider(),
@@ -171,7 +165,8 @@ class Listinfomation extends StatelessWidget {
                 } else {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
                   );
                 }
               },
@@ -181,5 +176,36 @@ class Listinfomation extends StatelessWidget {
         ButtonDarkLight(),
       ],
     );
+  }
+
+  BlocBuilder<PremiumCubit, PremiumState> Premium(String username) {
+    return BlocBuilder<PremiumCubit, PremiumState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      const CircleAvatar(
+                        radius: 60,
+                        backgroundImage: AssetImage(
+                            'assets/thuan.jpg'), // Replace with your image URL
+                      ),
+                      SizedBox(height: 20),
+                      Text(username, style: TextStyle(fontSize: 18)),
+                      SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(state.isPremium
+                            ? 'Bạn đã mua gói Premium'
+                            : 'Mua gói Premium'), // Change text based on state),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.red,
+                          disabledForegroundColor:
+                              Colors.white.withOpacity(0.38),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
   }
 }

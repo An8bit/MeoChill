@@ -16,13 +16,13 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PremiumCubit(context.read<Api>()),
-      child: buydetail(),
+      child: BuyDetail(),
     );
   }
 }
 
-class buydetail extends StatelessWidget {
-  const buydetail({
+class BuyDetail extends StatelessWidget {
+  const BuyDetail({
     super.key,
   });
 
@@ -38,12 +38,12 @@ class buydetail extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                const ListTile(
-                  title: Text('YouTube Premium',
+                 ListTile(
+                  title: const Text('MellChill Premium',
                       style: TextStyle(color: Colors.white)),
                   subtitle:
-                      Text('YouTube', style: TextStyle(color: Colors.grey)),
-                  leading: Icon(Icons.youtube_searched_for, color: Colors.red),
+                      const Text('MellChill', style: TextStyle(color: Colors.grey)),
+                  leading: Image.asset("assets/images.png"), 
                 ),
                 Container(
                   padding: EdgeInsets.all(16),
@@ -148,10 +148,10 @@ class buydetail extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                   onPressed: () {
-                    context.read<PremiumCubit>().checkPremium();
+                    context.read<PremiumCubit>().buyPremium();
                     // Show SnackBar upon success
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text("Subscription check successful!"),
                         backgroundColor: Colors.green,
                       ),

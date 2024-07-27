@@ -31,4 +31,5 @@ abstract class Api{
   Future<bool> addFavorite(String email,String id);
   Future<bool> deleteFavorite(String email,String id);
   Future<bool> checkFavorite(String email,String id);
+  Future<bool> checkPremium(String email);
 }

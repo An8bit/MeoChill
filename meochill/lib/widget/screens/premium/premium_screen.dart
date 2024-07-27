@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meochill/generated/l10n.dart';
+import 'package:meochill/widget/screens/premium/cubit/premium_cubit.dart';
 import 'package:meochill/widget/screens/premium/premiumdetails_screen.dart';
+
+import '../../../repostsitories/api.dart';
 
 class PremiumScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PillowList();
+    return BlocProvider(
+      create: (context) => PremiumCubit(context.read<Api>()),
+      child: PillowList(),
+    );
   }
 }
 
@@ -94,7 +101,8 @@ class PillowList extends StatelessWidget {
                           color: Colors
                               .blue, // Blue button for a more standard look
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SubscriptionPage()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => SubscriptionPage()));
 
                             // Logic to handle subscription or any action
                           },

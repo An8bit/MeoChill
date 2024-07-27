@@ -302,20 +302,30 @@ class MongoService implements Api {
       } else {
         return false;
       }
-    }else{
+    } else {
       return false;
     }
   }
-  
+
   @override
   Future<bool> checkFavorite(String email, String id) async {
-   List<Movie> listFavorite = await getListFavorite(email);
-   
-    if(listFavorite.any((movie) => movie.id?.oid ==id)){
+    List<Movie> listFavorite = await getListFavorite(email);
+
+    if (listFavorite.any((movie) => movie.id?.oid == id)) {
       return true;
-}
-else{
-  return false;
-}
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> checkPremium(String email) async {
+    var collectionAccount = await db.collection(USER_COLLECTION);
+    var result = await collectionAccount.findOne(where.eq("email", email));
+    if (result["premium"]==true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
